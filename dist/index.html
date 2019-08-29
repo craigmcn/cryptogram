@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Cryptogram helper</title>
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" href="/favicon-32x32.png" sizes="32x32" />
+    <link rel="icon" type="image/png" href="/favicon-16x16.png" sizes="16x16" />
+    <link rel="manifest" href="/manifest.json" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#1e90ff" />
+    <meta name="theme-color" content="#1e90ff" />
+
+    <link rel="stylesheet" href="https://www.craigmcn.com/albertcss/css/albert.min.css">
+    <link rel="stylesheet" href="./style.css">
+    <script src="https://kit.fontawesome.com/453b852cdd.js"></script>
+</head>
+
+<body>
+    <!-- partial:index.partial.html -->
+    <header class="header">
+        <h1>Cryptogram Helper</h1>
+    </header>
+
+    <main class="main main--fixed">
+
+        <!-- Enter cryptogram - textarea -->
+        <section id="start-cryptogram">
+            <form id="enter-cryptogram" class="form">
+                <label for="cryptogram-text" class="form__label">Enter your cryptogram</label>
+                <textarea id="cryptogram-text" class="form__control" style="height: auto"></textarea>
+                <button class="button button--primary" type="submit">
+                    <span class="fad fa-play-circle"></span> Start
+                </button>
+            </form>
+        </section>
+
+        <!-- Cryptogram solution - JS-updated div -->
+        <section id="cryptogram-solution" class="flex flex--container flex--wrap solution"></section>
+
+        <!-- Cryptogram alphabet - JS-listening divs -->
+        <section id="alpha" class="alpha flex--wrap" style="display: none; margin-bottom: 1rem">
+            <div class="alpha__letter" data-letter="A">A</div>
+            <div class="alpha__letter" data-letter="B">B</div>
+            <div class="alpha__letter" data-letter="C">C</div>
+            <div class="alpha__letter" data-letter="D">D</div>
+            <div class="alpha__letter" data-letter="E">E</div>
+            <div class="alpha__letter" data-letter="F">F</div>
+            <div class="alpha__letter" data-letter="G">G</div>
+            <div class="alpha__letter" data-letter="H">H</div>
+            <div class="alpha__letter" data-letter="I">I</div>
+            <div class="alpha__letter" data-letter="J">J</div>
+            <div class="alpha__letter" data-letter="K">K</div>
+            <div class="alpha__letter" data-letter="L">L</div>
+            <div class="alpha__letter" data-letter="M">M</div>
+            <div class="alpha__letter" data-letter="N">N</div>
+            <div class="alpha__letter" data-letter="O">O</div>
+            <div class="alpha__letter" data-letter="P">P</div>
+            <div class="alpha__letter" data-letter="Q">Q</div>
+            <div class="alpha__letter" data-letter="R">R</div>
+            <div class="alpha__letter" data-letter="S">S</div>
+            <div class="alpha__letter" data-letter="T">T</div>
+            <div class="alpha__letter" data-letter="U">U</div>
+            <div class="alpha__letter" data-letter="V">V</div>
+            <div class="alpha__letter" data-letter="W">W</div>
+            <div class="alpha__letter" data-letter="X">X</div>
+            <div class="alpha__letter" data-letter="Y">Y</div>
+            <div class="alpha__letter" data-letter="Z">Z</div>
+        </section>
+
+        <aside id="action-buttons" style="display: none;">
+            <button id="edit-button" class="button button--secondary" type="button">
+                <span class="fad fa-edit"></span> Edit
+            </button>
+            <button id="clear-button" class="button" type="button">
+                <span class="fad fa-sync-alt"></span> Clear
+            </button>
+            <button id="new-button" class="button button--link" type="button">New puzzle</button>
+        </aside>
+
+    </main>
+
+    <script src="./script.js"></script>
+
+</body>
+
+</html>

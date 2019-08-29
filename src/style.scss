@@ -1,0 +1,52 @@
+/* Colours */
+$green: #036803;
+$red: #b60202;
+
+/* Alphabet grid */
+.alpha {
+    display: flex;
+    width: 100%;
+    
+    &__letter {
+        font-size: 1.4rem;
+        margin: 0.16667rem;
+        padding: 0.33333rem;
+        text-align: center;
+        width: 2rem;
+    }
+}
+
+/* Solution Grid */
+.solution {
+    &__item {
+        height: 2rem;
+        text-align: center;
+    }
+    &__input {
+        height: 100%;
+        width: 2rem;
+        text-align: center;
+        
+        &.active {
+            border-color: $green;
+        }
+    }
+    &__puzzle {
+        text-align: center;
+    }
+    &--complete .solution__input {
+        border-color: $green;
+        border-width: 1px;
+    }
+}
+
+/* Highlight */
+.used {
+    color: #444;
+    background-color: #ddd;
+    
+    &.error {
+        color: $red;
+        background-color: lighten($red, 45%);
+    }
+}
