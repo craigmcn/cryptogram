@@ -19,6 +19,7 @@ editButton.addEventListener('click', function (e) {
   hide(alphabet);
   hide(actionButtons);
   empty(cryptogramSolution);
+  e.target.blur();
 });
 newButton.addEventListener('click', function (e) {
   empty(cryptogramSolution);
@@ -26,9 +27,11 @@ newButton.addEventListener('click', function (e) {
   show(startCryptogram);
   hide(alphabet);
   hide(actionButtons);
+  e.target.blur();
 });
 clearButton.addEventListener('click', function (e) {
   initCryptogram();
+  e.target.blur();
 });
 
 var initCryptogram = function initCryptogram() {
@@ -37,21 +40,23 @@ var initCryptogram = function initCryptogram() {
   show(actionButtons);
   show(alphabet, 'flex');
   alphabet.querySelectorAll('.alpha__letter').forEach(function (l) {
-    return l.classList.remove('used', 'error');
+    l.classList.remove('used', 'error');
+    l.dataset.count = 0;
   });
   var text = cryptogramText.value.toUpperCase().split(' ');
   var crypto = text.map(function (t) {
     var letters = t.split('').map(function (l) {
-      var input = l.match(/[A-Z]/) ? "<input class=\"solution__input\" type=\"text\" maxlength=\"1\" data-puzzle=\"".concat(l, "\">") : l;
-      return "<div class=\"flex flex--column\"><div class=\"solution__item\">".concat(input, "</div><div class=\"solution__puzzle\">").concat(l, "</div></div>");
+      var input = l.match(/[A-Z]/) ? "<input class=\"solution__input\" type=\"text\" maxlength=\"2\" data-puzzle=\"".concat(l, "\">") : l;
+      return "<div class=\"flex flex--column\"><div class=\"solution__item flex flex--ai-end flex--jc-center\">".concat(input, "</div><div class=\"solution__puzzle\">").concat(l, "</div></div>");
     });
     return "<div class=\"flex flex__contained\">".concat(letters.join(''), "</div>");
   });
+  cryptogramSolution.classList.remove('solution--complete');
   cryptogramSolution.innerHTML = crypto.join('');
   var inputs = cryptogramSolution.querySelectorAll('.solution__input');
   inputs.forEach(function (i) {
     i.addEventListener('input', function (e) {
-      var value = e.target.value.toUpperCase();
+      var value = e.target.value.slice(-1).toUpperCase();
       var puzzle = e.target.dataset.puzzle;
       var oldValue = e.target.dataset.oldValue;
 
@@ -68,31 +73,35 @@ var initCryptogram = function initCryptogram() {
         }
       });
       var alphaLetter;
+      console.log();
 
       if (value && value != oldValue) {
         alphaLetter = alphabet.querySelector("[data-letter=\"".concat(value, "\"]"));
+        alphaLetter.dataset.count = parseInt(alphaLetter.dataset.count) + 1;
 
-        if (alphaLetter.classList.contains('used')) {
+        if (parseInt(alphaLetter.dataset.count) > 1) {
           alphaLetter.classList.add('error');
         } else {
           alphaLetter.classList.add('used');
         }
 
         if (oldValue) {
-          var _alphaLetter = alphabet.querySelector("[data-letter=\"".concat(oldValue, "\"]"));
+          alphaLetter = alphabet.querySelector("[data-letter=\"".concat(oldValue, "\"]"));
+          alphaLetter.dataset.count = parseInt(alphaLetter.dataset.count) - 1;
 
-          if (_alphaLetter.classList.contains('error')) {
-            _alphaLetter.classList.remove('error');
-          } else {
-            _alphaLetter.classList.remove('used');
+          if (parseInt(alphaLetter.dataset.count) === 1) {
+            alphaLetter.classList.remove('error');
+          } else if (parseInt(alphaLetter.dataset.count) === 0) {
+            alphaLetter.classList.remove('used');
           }
         }
       } else if (!value && oldValue) {
         alphaLetter = alphabet.querySelector("[data-letter=\"".concat(oldValue, "\"]"));
+        alphaLetter.dataset.count = parseInt(alphaLetter.dataset.count) - 1;
 
-        if (alphaLetter.classList.contains('error')) {
+        if (parseInt(alphaLetter.dataset.count) === 1) {
           alphaLetter.classList.remove('error');
-        } else {
+        } else if (parseInt(alphaLetter.dataset.count) === 0) {
           alphaLetter.classList.remove('used');
         }
       }

@@ -18,6 +18,7 @@ editButton.addEventListener('click', e => {
     hide(alphabet)
     hide(actionButtons)
     empty(cryptogramSolution)
+    e.target.blur()
 })
 
 newButton.addEventListener('click', e => {
@@ -26,10 +27,12 @@ newButton.addEventListener('click', e => {
     show(startCryptogram)
     hide(alphabet)
     hide(actionButtons)
+    e.target.blur()
 })
 
 clearButton.addEventListener('click', e => {
     initCryptogram()
+    e.target.blur()
 })
 
 const initCryptogram = () => {
@@ -38,22 +41,26 @@ const initCryptogram = () => {
     hide(startCryptogram)
     show(actionButtons)
     show(alphabet, 'flex')
-    alphabet.querySelectorAll('.alpha__letter').forEach(l => l.classList.remove('used', 'error'))
+    alphabet.querySelectorAll('.alpha__letter').forEach(l => {
+        l.classList.remove('used', 'error')
+        l.dataset.count = 0
+    })
 
     const text = cryptogramText.value.toUpperCase().split(' ')
     const crypto = text.map(t => {
         let letters = t.split('').map(l => {
-            let input = l.match(/[A-Z]/) ? `<input class="solution__input" type="text" maxlength="1" data-puzzle="${l}">` : l
-            return `<div class="flex flex--column"><div class="solution__item">${input}</div><div class="solution__puzzle">${l}</div></div>`
+            let input = l.match(/[A-Z]/) ? `<input class="solution__input" type="text" maxlength="2" data-puzzle="${l}">` : l
+            return `<div class="flex flex--column"><div class="solution__item flex flex--ai-end flex--jc-center">${input}</div><div class="solution__puzzle">${l}</div></div>`
         })
         return `<div class="flex flex__contained">${letters.join('')}</div>`
     })
+    cryptogramSolution.classList.remove('solution--complete')
     cryptogramSolution.innerHTML = crypto.join('')
 
     const inputs = cryptogramSolution.querySelectorAll('.solution__input')
     inputs.forEach(i => {
         i.addEventListener('input', e => {
-            const value = e.target.value.toUpperCase()
+            const value = e.target.value.slice(-1).toUpperCase()
             const puzzle = e.target.dataset.puzzle
             const oldValue = e.target.dataset.oldValue
             if (value && (value === puzzle || !value.match(/[A-Z]/))) {
@@ -69,26 +76,30 @@ const initCryptogram = () => {
             })
 
             let alphaLetter
+            console.log()
             if (value && value != oldValue) {
                 alphaLetter = alphabet.querySelector(`[data-letter="${value}"]`)
-                if (alphaLetter.classList.contains('used')) {
+                alphaLetter.dataset.count = parseInt(alphaLetter.dataset.count) + 1
+                if (parseInt(alphaLetter.dataset.count) > 1) {
                     alphaLetter.classList.add('error')
                 } else {
                     alphaLetter.classList.add('used')
                 }
                 if (oldValue) {
-                    const alphaLetter = alphabet.querySelector(`[data-letter="${oldValue}"]`)
-                    if (alphaLetter.classList.contains('error')) {
+                    alphaLetter = alphabet.querySelector(`[data-letter="${oldValue}"]`)
+                    alphaLetter.dataset.count = parseInt(alphaLetter.dataset.count) - 1
+                    if (parseInt(alphaLetter.dataset.count) === 1) {
                         alphaLetter.classList.remove('error')
-                    } else {
+                    } else if (parseInt(alphaLetter.dataset.count) === 0) {
                         alphaLetter.classList.remove('used')
                     }
                 }
             } else if (!value && oldValue) {
                 alphaLetter = alphabet.querySelector(`[data-letter="${oldValue}"]`)
-                if (alphaLetter.classList.contains('error')) {
+                alphaLetter.dataset.count = parseInt(alphaLetter.dataset.count) - 1
+                if (parseInt(alphaLetter.dataset.count) === 1) {
                     alphaLetter.classList.remove('error')
-                } else {
+                } else if (parseInt(alphaLetter.dataset.count) === 0) {
                     alphaLetter.classList.remove('used')
                 }
             }

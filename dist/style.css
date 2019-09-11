@@ -5,7 +5,7 @@
 .alpha__letter { font-size: 1.4rem; margin: 0.16667rem; padding: 0.33333rem; text-align: center; width: 2rem; }
 
 /* Solution Grid */
-.solution__item { height: 2rem; text-align: center; }
+.solution__item { height: 2rem; min-width: 1rem; }
 
 .solution__input { height: 100%; width: 2rem; text-align: center; }
 

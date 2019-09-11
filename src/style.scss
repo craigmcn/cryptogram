@@ -20,7 +20,7 @@ $red: #b60202;
 .solution {
     &__item {
         height: 2rem;
-        text-align: center;
+        min-width: 1rem;
     }
     &__input {
         height: 100%;
