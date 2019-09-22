@@ -1,6 +1,6 @@
 /* Colours */
 /* Alphabet grid */
-.alpha { display: flex; width: 100%; }
+.alpha { width: 100%; }
 
 .alpha__letter { font-size: 1.4rem; margin: 0.16667rem; padding: 0.33333rem; text-align: center; width: 2rem; }
 

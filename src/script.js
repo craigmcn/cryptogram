@@ -52,7 +52,7 @@ const initCryptogram = () => {
             let input = l.match(/[A-Z]/) ? `<input class="solution__input" type="text" maxlength="2" data-puzzle="${l}">` : l
             return `<div class="flex flex--column"><div class="solution__item flex flex--ai-end flex--jc-center">${input}</div><div class="solution__puzzle">${l}</div></div>`
         })
-        return `<div class="flex flex__contained">${letters.join('')}</div>`
+        return `<div class="flex flex__item">${letters.join('')}</div>`
     })
     cryptogramSolution.classList.remove('solution--complete')
     cryptogramSolution.innerHTML = crypto.join('')

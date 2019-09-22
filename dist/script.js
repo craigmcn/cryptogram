@@ -49,7 +49,7 @@ var initCryptogram = function initCryptogram() {
       var input = l.match(/[A-Z]/) ? "<input class=\"solution__input\" type=\"text\" maxlength=\"2\" data-puzzle=\"".concat(l, "\">") : l;
       return "<div class=\"flex flex--column\"><div class=\"solution__item flex flex--ai-end flex--jc-center\">".concat(input, "</div><div class=\"solution__puzzle\">").concat(l, "</div></div>");
     });
-    return "<div class=\"flex flex__contained\">".concat(letters.join(''), "</div>");
+    return "<div class=\"flex flex__item\">".concat(letters.join(''), "</div>");
   });
   cryptogramSolution.classList.remove('solution--complete');
   cryptogramSolution.innerHTML = crypto.join('');
