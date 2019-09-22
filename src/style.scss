@@ -37,6 +37,11 @@ $red: #b60202;
         border-color: $green;
         border-width: 1px;
     }
+
+    & > .flex__item {
+        // AlbertCSS default for `.flex__item` is `flex-grow: 1`
+        flex-grow: 0;
+    }
 }
 
 /* Highlight */
