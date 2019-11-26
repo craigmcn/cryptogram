@@ -15,7 +15,7 @@
 
 .solution--complete .solution__input { border-color: #036803; border-width: 1px; }
 
-.solution > .flex__item { flex-grow: 0; }
+.solution > .flex__item { -webkit-box-flex: 0; flex-grow: 0; }
 
 /* Highlight */
 .used { color: #444; background-color: #ddd; }
