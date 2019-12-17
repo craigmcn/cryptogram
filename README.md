@@ -1,4 +1,3 @@
 # Cryptogram helper
- _A Pen created at CodePen.io. Original URL: [https://codepen.io/craigmcn/pen/NVLPmd](https://codepen.io/craigmcn/pen/NVLPmd).
 
- 
+A little tool to help solve a cryptogram without a lot of corrections on the page.
