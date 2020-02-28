@@ -1,0 +1,15 @@
+{
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.formatOnSave": false,
+    "[html]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "vscode.html-language-features"
+    },
+    "[javascript]": {
+        "editor.formatOnSave": true,
+    },
+    "files.eol": "\n",
+    "prettier.semi": false,
+    "prettier.singleQuote": true,
+    "prettier.trailingComma": "es5",
+}

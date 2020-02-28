@@ -33,9 +33,13 @@ $red: #b60202;
     &__puzzle {
         text-align: center;
     }
-    &--complete .solution__input {
-        border-color: $green;
-        border-width: 1px;
+    &--complete {
+        background-color: lighten($green, 72%);
+
+        & .solution__input {
+            border-color: $green;
+            border-width: 1px;
+        }
     }
 
     & > .flex__item {
@@ -53,4 +57,16 @@ $red: #b60202;
         color: $red;
         background-color: lighten($red, 45%);
     }
+}
+
+/* Icons */
+.icon {
+    display: inline-block;
+    height: 1em;
+    vertical-align: -.125em;
+}
+
+/* Miscelaneous */
+[hidden] {
+    display: none !important;
 }
