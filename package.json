@@ -17,8 +17,8 @@
   "author": "Craig McNaughton",
   "license": "GPL-3.0-or-later",
   "devDependencies": {
-    "@babel/core": "^7.7.5",
-    "@babel/preset-env": "^7.7.6",
+    "@babel/core": "^7.8.7",
+    "@babel/preset-env": "^7.8.7",
     "babelify": "^10.0.0",
     "browser-sync": "^2.26.7",
     "browserify": "^16.5.0",
@@ -28,7 +28,7 @@
     "gulp-if": "^3.0.0",
     "gulp-sass": "^4.0.2",
     "gulp-uglify": "^3.0.2",
-    "minimist": "^1.2.0",
+    "minimist": "^1.2.3",
     "vinyl-buffer": "^1.0.1",
     "vinyl-source-stream": "^2.0.0"
   }
