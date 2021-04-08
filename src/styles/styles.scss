@@ -34,7 +34,9 @@ $red: #b60202;
         text-align: center;
     }
     &--complete {
-        background-color: lighten($green, 72%);
+        background-color: rgba($green, 0.05);
+        border: 1px solid $green;
+        border-radius: 0.25rem;
 
         & .solution__input {
             border-color: $green;

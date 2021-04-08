@@ -1,6 +1,6 @@
 {
   "name": "cryptogram",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Cryptogram puzzle solution helper",
   "main": "gulpfile.js",
   "scripts": {
@@ -17,10 +17,10 @@
   "author": "Craig McNaughton",
   "license": "GPL-3.0-or-later",
   "devDependencies": {
-    "@babel/core": "^7.12.3",
-    "@babel/preset-env": "^7.12.1",
+    "@babel/core": "^7.13.14",
+    "@babel/preset-env": "^7.13.12",
     "babelify": "^10.0.0",
-    "browser-sync": "^2.26.13",
+    "browser-sync": "^2.26.14",
     "browserify": "^17.0.0",
     "gulp": "^4.0.2",
     "gulp-autoprefixer": "^7.0.1",
