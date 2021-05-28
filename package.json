@@ -1,6 +1,6 @@
 {
   "name": "cryptogram",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Cryptogram puzzle solution helper",
   "main": "gulpfile.js",
   "scripts": {
