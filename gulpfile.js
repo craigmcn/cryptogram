@@ -4,9 +4,11 @@ const flatten = require('gulp-flatten')
 const argv = require('minimist')(process.argv.slice(2))
 const env = argv.env ? argv.env : 'development'
 const output = {
-  development: './tmp/cryptogram',
-  production: './dist/cryptogram',
+  development: './tmp',
+  production: './dist',
+  netlify: './netlify',
 }
+const outputNetlify = `${output[env]}/cryptogram`
 const browserSync = require('browser-sync').create()
 
 // CSS
@@ -31,6 +33,7 @@ gulp.task('styles', function () {
     .pipe(autoprefixer())
     .pipe(flatten())
     .pipe(gulp.dest(`${output[env]}/css`))
+    .pipe(gulpif(env === 'netlify', gulp.dest(`${outputNetlify}/css`)))
 })
 
 // JS
@@ -50,15 +53,16 @@ gulp.task('scripts', function () {
     .transform(
       babelify.configure({
         presets: ['@babel/preset-env'],
-        sourceMaps: env === 'production',
+        sourceMaps: env !== 'development',
       })
     )
     .bundle()
     .pipe(source('scripts.js'))
-    .pipe(gulpif(env === 'production', buffer()))
-    .pipe(gulpif(env === 'production', uglify()))
+    .pipe(gulpif(env !== 'development', buffer()))
+    .pipe(gulpif(env !== 'development', uglify()))
     .pipe(flatten())
     .pipe(gulp.dest(`${output[env]}/js`))
+    .pipe(gulpif(env === 'netlify', gulp.dest(`${outputNetlify}/js`)))
 })
 
 // Vendor
@@ -68,15 +72,28 @@ gulp.task('vendor-css', function () {
     .pipe(gulp.dest(`${output[env]}/css`))
 })
 
+gulp.task('sw', function () {
+  const replace = require('gulp-replace')
+  return gulp
+    .src('./src/sw.js')
+    .pipe(replace('{buildtime}', Date.now()))
+    .pipe(gulp.dest(output[env]))
+    .pipe(gulpif(env === 'netlify', gulp.dest(outputNetlify)))
+})
+
 // HTML
 gulp.task('html', function () {
   return gulp
-    .src(['./src/**/*.html', './src/site.webmanifest', './src/sw.js'])
+    .src(['./src/**/*.html', './src/site.webmanifest'])
     .pipe(gulp.dest(output[env]))
+    .pipe(gulpif(env === 'netlify', gulp.dest(outputNetlify)))
 })
 
 // Build
-gulp.task('build', gulp.parallel('styles', 'scripts', 'vendor-css', 'html'))
+gulp.task(
+  'build',
+  gulp.parallel('styles', 'scripts', 'vendor-css', 'sw', 'html')
+)
 
 // Reload browser
 gulp.task('reload', (done) => {
@@ -89,7 +106,6 @@ gulp.task('browserSync', () => {
   browserSync.init({
     port: 1237,
     server: './tmp',
-    startPath: '/cryptogram/index.html',
     ui: false,
   })
   gulp.watch(
