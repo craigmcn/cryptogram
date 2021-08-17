@@ -70,6 +70,7 @@ gulp.task('vendor-css', function () {
   return gulp
     .src(['./src/styles/albert.min.css'])
     .pipe(gulp.dest(`${output[env]}/css`))
+    .pipe(gulpif(env === 'netlify', gulp.dest(`${outputNetlify}/css`)))
 })
 
 gulp.task('sw', function () {
