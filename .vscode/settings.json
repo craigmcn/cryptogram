@@ -1,15 +1,37 @@
 {
-    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true,
+        "source.fixAll.stylelint": true
+    },
     "editor.formatOnSave": false,
     "[html]": {
-        "editor.formatOnSave": true,
-        "editor.defaultFormatter": "vscode.html-language-features"
+      "editor.formatOnSave": true,
+      "editor.defaultFormatter": "vscode.html-language-features"
     },
     "[javascript]": {
-        "editor.formatOnSave": true,
+      "editor.formatOnSave": true,
     },
+    "[css]": {
+      "editor.formatOnSave": true,
+    },
+    "css.validate": false,
+    "editor.detectIndentation": false,
+    "eslint.validate": [
+        "javascript"
+    ],
+    "stylelint.validate": [
+        "css",
+        "html",
+        "postcss"
+    ],
     "files.eol": "\n",
-    "prettier.semi": false,
-    "prettier.singleQuote": true,
-    "prettier.trailingComma": "es5",
+    "files.insertFinalNewline": true,
+    "cSpell.words": [
+        "buildtime",
+        "craigmcn",
+        "divs",
+        "gulpfile",
+        "gulpif",
+        "msapplication"
+    ],
 }
