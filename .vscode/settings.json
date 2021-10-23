@@ -8,9 +8,6 @@
       "editor.formatOnSave": true,
       "editor.defaultFormatter": "vscode.html-language-features"
     },
-    "[javascript]": {
-      "editor.formatOnSave": true,
-    },
     "[css]": {
       "editor.formatOnSave": true,
     },
@@ -32,6 +29,18 @@
         "divs",
         "gulpfile",
         "gulpif",
-        "msapplication"
+        "maxlength",
+        "msapplication",
+        "PRECACHE",
+        "STORAGEID"
     ],
+    "cSpell.ignorePaths": [
+        "package-lock.json",
+        "node_modules",
+        "vscode-extension",
+        ".git/objects",
+        ".vscode",
+        ".vscode-insiders",
+        ".eslintrc.json"
+    ]
 }
