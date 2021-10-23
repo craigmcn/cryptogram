@@ -1,11 +1,11 @@
-export const show = el => {
+export const show = (el) => {
     el.removeAttribute('hidden')
 }
 
-export const hide = el => {
+export const hide = (el) => {
     el.setAttribute('hidden', true)
 }
 
-export const empty = el => {
+export const empty = (el) => {
     el.innerHTML = ''
 }
