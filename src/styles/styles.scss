@@ -5,7 +5,7 @@ $red: #b60202;
 /* Alphabet grid */
 .alpha {
     width: 100%;
-    
+
     &__letter {
         font-size: 1.4rem;
         margin: 0.16667rem;
@@ -21,18 +21,21 @@ $red: #b60202;
         height: 2rem;
         min-width: 1rem;
     }
+
     &__input {
         height: 100%;
         width: 2rem;
         text-align: center;
-        
+
         &.active {
             border-color: $green;
         }
     }
+
     &__puzzle {
         text-align: center;
     }
+
     &--complete {
         background-color: rgba($green, 0.05);
         border: 1px solid $green;
@@ -44,7 +47,7 @@ $red: #b60202;
         }
     }
 
-    & > .flex__item {
+    &>.flex__item {
         // AlbertCSS default for `.flex__item` is `flex-grow: 1`
         flex-grow: 0;
     }
@@ -54,7 +57,7 @@ $red: #b60202;
 .used {
     color: #444;
     background-color: #ddd;
-    
+
     &.error {
         color: $red;
         background-color: lighten($red, 45%);

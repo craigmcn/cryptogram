@@ -1,7 +1,6 @@
 {
     "editor.codeActionsOnSave": {
-        "source.fixAll.eslint": true,
-        "source.fixAll.stylelint": true
+        "source.fixAll.eslint": true
     },
     "editor.formatOnSave": false,
     "[html]": {
@@ -11,18 +10,19 @@
     "[css]": {
       "editor.formatOnSave": true,
     },
-    "css.validate": false,
+    "[scss]": {
+      "editor.formatOnSave": true,
+    },
+    "css.validate": true,
     "editor.detectIndentation": false,
     "eslint.validate": [
         "javascript"
     ],
-    "stylelint.validate": [
-        "css",
-        "html",
-        "postcss"
-    ],
     "files.eol": "\n",
     "files.insertFinalNewline": true,
+    "beautify.language": {
+        "css": ["css", "scss"],
+    },
     "cSpell.words": [
         "buildtime",
         "craigmcn",
@@ -41,6 +41,7 @@
         ".git/objects",
         ".vscode",
         ".vscode-insiders",
-        ".eslintrc.json"
+        ".eslintrc.json",
+        "src/site.webmanifest"
     ]
 }
