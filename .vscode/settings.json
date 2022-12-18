@@ -15,6 +15,7 @@
     },
     "css.validate": true,
     "editor.detectIndentation": false,
+    "eslint.packageManager": "yarn",
     "eslint.validate": [
         "javascript"
     ],
@@ -25,14 +26,13 @@
     },
     "cSpell.words": [
         "buildtime",
-        "craigmcn",
+        "Colours",
         "divs",
-        "gulpfile",
-        "gulpif",
+        "Evolv",
         "maxlength",
-        "msapplication",
         "PRECACHE",
-        "STORAGEID"
+        "STORAGEID",
+        "unixtime"
     ],
     "cSpell.ignorePaths": [
         "package-lock.json",
