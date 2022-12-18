@@ -89,7 +89,7 @@ $redDarkMode: #f49090;
     
         &--complete {
             background-color: rgba($greenDarkMode, 0.05);
-            border: $greenDarkMode;
+            border-color: $greenDarkMode;
     
             & .solution__input {
                 border-color: $greenDarkMode;
