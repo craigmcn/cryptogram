@@ -1,6 +1,11 @@
+@import "albert.css";
+
 /* Colours */
 $green: #036803;
 $red: #b60202;
+
+$greenDarkMode: #09c809;
+$redDarkMode: #f49090;
 
 /* Alphabet grid */
 .alpha {
@@ -23,6 +28,8 @@ $red: #b60202;
     }
 
     &__input {
+        border: 1px solid #444;
+        color: #444;
         height: 100%;
         width: 2rem;
         text-align: center;
@@ -69,4 +76,34 @@ $red: #b60202;
     display: inline-block;
     height: 1em;
     vertical-align: -.125em;
+}
+
+@media (prefers-color-scheme: dark) {
+    .solution {    
+        &__input {
+            background-color: #444;
+            border-color: #ddd;
+            color: #ddd;
+            &.active {
+                border-color: $greenDarkMode;
+            }
+        }
+    
+        &--complete {
+            background-color: rgba($greenDarkMode, 0.05);
+            border-color: $greenDarkMode;
+    
+            & .solution__input {
+                border-color: $greenDarkMode;
+            }
+        }
+    }
+    .used {
+        color: #ddd;
+        background-color: #444;
+        &.error {
+            color: $redDarkMode;
+            background-color: darken($redDarkMode, 45%);
+        }
+    }
 }
