@@ -34,7 +34,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-n", "virtual:b381a2e2ad0cfef9c349c7b2e85adfbfd98e686c6ecf23d300c85a864666f99c668b54838a30e6f50307138846bf74e2853c9b29ad80c78fa4c48d8d04dd5043#npm:15.6.0"],\
             ["eslint-plugin-promise", "virtual:b381a2e2ad0cfef9c349c7b2e85adfbfd98e686c6ecf23d300c85a864666f99c668b54838a30e6f50307138846bf74e2853c9b29ad80c78fa4c48d8d04dd5043#npm:6.1.1"],\
             ["sass", "npm:1.57.0"],\
-            ["vite", "virtual:b381a2e2ad0cfef9c349c7b2e85adfbfd98e686c6ecf23d300c85a864666f99c668b54838a30e6f50307138846bf74e2853c9b29ad80c78fa4c48d8d04dd5043#npm:4.5.2"],\
+            ["vite", "virtual:b381a2e2ad0cfef9c349c7b2e85adfbfd98e686c6ecf23d300c85a864666f99c668b54838a30e6f50307138846bf74e2853c9b29ad80c78fa4c48d8d04dd5043#npm:4.5.3"],\
             ["vite-plugin-pwa", "virtual:b381a2e2ad0cfef9c349c7b2e85adfbfd98e686c6ecf23d300c85a864666f99c668b54838a30e6f50307138846bf74e2853c9b29ad80c78fa4c48d8d04dd5043#npm:0.14.0"]\
           ],\
           "linkType": "SOFT"\
@@ -3541,7 +3541,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["eslint-plugin-n", "virtual:b381a2e2ad0cfef9c349c7b2e85adfbfd98e686c6ecf23d300c85a864666f99c668b54838a30e6f50307138846bf74e2853c9b29ad80c78fa4c48d8d04dd5043#npm:15.6.0"],\
             ["eslint-plugin-promise", "virtual:b381a2e2ad0cfef9c349c7b2e85adfbfd98e686c6ecf23d300c85a864666f99c668b54838a30e6f50307138846bf74e2853c9b29ad80c78fa4c48d8d04dd5043#npm:6.1.1"],\
             ["sass", "npm:1.57.0"],\
-            ["vite", "virtual:b381a2e2ad0cfef9c349c7b2e85adfbfd98e686c6ecf23d300c85a864666f99c668b54838a30e6f50307138846bf74e2853c9b29ad80c78fa4c48d8d04dd5043#npm:4.5.2"],\
+            ["vite", "virtual:b381a2e2ad0cfef9c349c7b2e85adfbfd98e686c6ecf23d300c85a864666f99c668b54838a30e6f50307138846bf74e2853c9b29ad80c78fa4c48d8d04dd5043#npm:4.5.3"],\
             ["vite-plugin-pwa", "virtual:b381a2e2ad0cfef9c349c7b2e85adfbfd98e686c6ecf23d300c85a864666f99c668b54838a30e6f50307138846bf74e2853c9b29ad80c78fa4c48d8d04dd5043#npm:0.14.0"]\
           ],\
           "linkType": "SOFT"\
@@ -6650,17 +6650,17 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]\
       ]],\
       ["vite", [\
-        ["npm:4.5.2", {\
-          "packageLocation": "./.yarn/cache/vite-npm-4.5.2-e430b2c117-9d1f84f703.zip/node_modules/vite/",\
+        ["npm:4.5.3", {\
+          "packageLocation": "./.yarn/cache/vite-npm-4.5.3-5cedc7cb8f-fd3f512ce4.zip/node_modules/vite/",\
           "packageDependencies": [\
-            ["vite", "npm:4.5.2"]\
+            ["vite", "npm:4.5.3"]\
           ],\
           "linkType": "SOFT"\
         }],\
-        ["virtual:b381a2e2ad0cfef9c349c7b2e85adfbfd98e686c6ecf23d300c85a864666f99c668b54838a30e6f50307138846bf74e2853c9b29ad80c78fa4c48d8d04dd5043#npm:4.5.2", {\
-          "packageLocation": "./.yarn/__virtual__/vite-virtual-7c01b86a2f/0/cache/vite-npm-4.5.2-e430b2c117-9d1f84f703.zip/node_modules/vite/",\
+        ["virtual:b381a2e2ad0cfef9c349c7b2e85adfbfd98e686c6ecf23d300c85a864666f99c668b54838a30e6f50307138846bf74e2853c9b29ad80c78fa4c48d8d04dd5043#npm:4.5.3", {\
+          "packageLocation": "./.yarn/__virtual__/vite-virtual-bf700794c0/0/cache/vite-npm-4.5.3-5cedc7cb8f-fd3f512ce4.zip/node_modules/vite/",\
           "packageDependencies": [\
-            ["vite", "virtual:b381a2e2ad0cfef9c349c7b2e85adfbfd98e686c6ecf23d300c85a864666f99c668b54838a30e6f50307138846bf74e2853c9b29ad80c78fa4c48d8d04dd5043#npm:4.5.2"],\
+            ["vite", "virtual:b381a2e2ad0cfef9c349c7b2e85adfbfd98e686c6ecf23d300c85a864666f99c668b54838a30e6f50307138846bf74e2853c9b29ad80c78fa4c48d8d04dd5043#npm:4.5.3"],\
             ["@types/less", null],\
             ["@types/lightningcss", null],\
             ["@types/node", null],\
@@ -6717,7 +6717,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["fast-glob", "npm:3.2.12"],\
             ["pretty-bytes", "npm:6.0.0"],\
             ["rollup", "npm:3.7.5"],\
-            ["vite", "virtual:b381a2e2ad0cfef9c349c7b2e85adfbfd98e686c6ecf23d300c85a864666f99c668b54838a30e6f50307138846bf74e2853c9b29ad80c78fa4c48d8d04dd5043#npm:4.5.2"],\
+            ["vite", "virtual:b381a2e2ad0cfef9c349c7b2e85adfbfd98e686c6ecf23d300c85a864666f99c668b54838a30e6f50307138846bf74e2853c9b29ad80c78fa4c48d8d04dd5043#npm:4.5.3"],\
             ["workbox-build", "npm:6.5.4"],\
             ["workbox-window", "npm:6.5.4"]\
           ],\
