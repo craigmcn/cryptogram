@@ -43,6 +43,7 @@
   "resolutions": {
     "ejs": "^5.0.1",
     "node-gyp": "^12.2.0",
+    "semver": "^7.5.2",
     "serialize-javascript": "^7.0.5"
   }
 }

@@ -177,7 +177,7 @@ const RAW_RUNTIME_STATE =
           ["debug", "virtual:643ed7cc338bcf145a82d8b05b3bef6bcf150ca545df386225596f10ce53cc90b88b3ca83e348ade1ccea5f3f8e76c92d2f0e2ba544da60d40aff9921c56872d#npm:4.3.4"],\
           ["gensync", "npm:1.0.0-beta.2"],\
           ["json5", "npm:2.2.3"],\
-          ["semver", "npm:6.3.1"]\
+          ["semver", "npm:7.7.4"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -243,7 +243,7 @@ const RAW_RUNTIME_STATE =
           ["@babel/helper-validator-option", "npm:7.24.7"],\
           ["browserslist", "npm:4.23.1"],\
           ["lru-cache", "npm:5.1.1"],\
-          ["semver", "npm:6.3.1"]\
+          ["semver", "npm:7.7.4"]\
         ],\
         "linkType": "HARD"\
       }],\
@@ -256,7 +256,7 @@ const RAW_RUNTIME_STATE =
           ["@babel/helper-validator-option", "npm:7.18.6"],\
           ["@types/babel__core", null],\
           ["browserslist", "npm:4.21.4"],\
-          ["semver", "npm:6.3.1"]\
+          ["semver", "npm:7.7.4"]\
         ],\
         "packagePeers": [\
           "@babel/core",\
@@ -337,7 +337,7 @@ const RAW_RUNTIME_STATE =
           ["debug", "virtual:643ed7cc338bcf145a82d8b05b3bef6bcf150ca545df386225596f10ce53cc90b88b3ca83e348ade1ccea5f3f8e76c92d2f0e2ba544da60d40aff9921c56872d#npm:4.3.4"],\
           ["lodash.debounce", "npm:4.0.8"],\
           ["resolve", "patch:resolve@npm%3A1.22.1#optional!builtin<compat/resolve>::version=1.22.1&hash=c3c19d"],\
-          ["semver", "npm:6.3.1"]\
+          ["semver", "npm:7.7.4"]\
         ],\
         "packagePeers": [\
           "@babel/core",\
@@ -2399,7 +2399,7 @@ const RAW_RUNTIME_STATE =
           ["babel-plugin-polyfill-corejs3", "virtual:f98aa7cd25d02f63a55f753fb060c584e225116a8a06193670bf9dc4743dc666a6ab4f4be30d9c2e2817b1a5f7022409f67df7d06157a2bb8629d2edb1aae972#npm:0.6.0"],\
           ["babel-plugin-polyfill-regenerator", "virtual:f98aa7cd25d02f63a55f753fb060c584e225116a8a06193670bf9dc4743dc666a6ab4f4be30d9c2e2817b1a5f7022409f67df7d06157a2bb8629d2edb1aae972#npm:0.4.1"],\
           ["core-js-compat", "npm:3.26.1"],\
-          ["semver", "npm:6.3.1"]\
+          ["semver", "npm:7.7.4"]\
         ],\
         "packagePeers": [\
           "@babel/core",\
@@ -3298,7 +3298,7 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "../../.yarn/berry/cache/@npmcli-fs-npm-5.0.0-9d737ae2f3-10.zip/node_modules/@npmcli/fs/",\
         "packageDependencies": [\
           ["@npmcli/fs", "npm:5.0.0"],\
-          ["semver", "npm:7.3.8"]\
+          ["semver", "npm:7.7.4"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -4510,7 +4510,7 @@ const RAW_RUNTIME_STATE =
           ["@babel/helper-define-polyfill-provider", "virtual:770c02fb8081a8387085008151dfe2b007612c8c6bacc4f3aebbd85844e425023d50ef023b0001dfe39bb74a1b51a3f9428631f2d237f5d984bb7102a646a8ce#npm:0.3.3"],\
           ["@types/babel__core", null],\
           ["babel-plugin-polyfill-corejs2", "virtual:f98aa7cd25d02f63a55f753fb060c584e225116a8a06193670bf9dc4743dc666a6ab4f4be30d9c2e2817b1a5f7022409f67df7d06157a2bb8629d2edb1aae972#npm:0.3.3"],\
-          ["semver", "npm:6.3.1"]\
+          ["semver", "npm:7.7.4"]\
         ],\
         "packagePeers": [\
           "@babel/core",\
@@ -5644,7 +5644,7 @@ const RAW_RUNTIME_STATE =
           ["object.values", "npm:1.2.1"],\
           ["prop-types", "npm:15.8.1"],\
           ["resolve", "patch:resolve@npm%3A2.0.0-next.6#optional!builtin<compat/resolve>::version=2.0.0-next.6&hash=c3c19d"],\
-          ["semver", "npm:6.3.1"],\
+          ["semver", "npm:7.7.4"],\
           ["string.prototype.matchall", "npm:4.0.12"],\
           ["string.prototype.repeat", "npm:1.0.0"]\
         ],\
@@ -7317,14 +7317,6 @@ const RAW_RUNTIME_STATE =
           ["yallist", "npm:3.1.1"]\
         ],\
         "linkType": "HARD"\
-      }],\
-      ["npm:6.0.0", {\
-        "packageLocation": "../../.yarn/berry/cache/lru-cache-npm-6.0.0-b4c8668fe1-10.zip/node_modules/lru-cache/",\
-        "packageDependencies": [\
-          ["lru-cache", "npm:6.0.0"],\
-          ["yallist", "npm:4.0.0"]\
-        ],\
-        "linkType": "HARD"\
       }]\
     ]],\
     ["magic-string", [\
@@ -7606,7 +7598,7 @@ const RAW_RUNTIME_STATE =
           ["es-errors", "npm:1.3.0"],\
           ["node-exports-info", "npm:1.6.0"],\
           ["object.entries", "npm:1.1.9"],\
-          ["semver", "npm:6.3.1"]\
+          ["semver", "npm:7.7.4"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -7622,7 +7614,7 @@ const RAW_RUNTIME_STATE =
           ["node-gyp", "npm:12.2.0"],\
           ["nopt", "npm:9.0.0"],\
           ["proc-log", "npm:6.1.0"],\
-          ["semver", "npm:7.3.8"],\
+          ["semver", "npm:7.7.4"],\
           ["tar", "npm:7.5.13"],\
           ["tinyglobby", "npm:0.2.16"],\
           ["which", "npm:6.0.1"]\
@@ -8398,21 +8390,6 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["semver", [\
-      ["npm:6.3.1", {\
-        "packageLocation": "../../.yarn/berry/cache/semver-npm-6.3.1-bcba31fdbe-10.zip/node_modules/semver/",\
-        "packageDependencies": [\
-          ["semver", "npm:6.3.1"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
-      ["npm:7.3.8", {\
-        "packageLocation": "../../.yarn/berry/cache/semver-npm-7.3.8-25a996cb4f-10.zip/node_modules/semver/",\
-        "packageDependencies": [\
-          ["lru-cache", "npm:6.0.0"],\
-          ["semver", "npm:7.3.8"]\
-        ],\
-        "linkType": "HARD"\
-      }],\
       ["npm:7.7.4", {\
         "packageLocation": "../../.yarn/berry/cache/semver-npm-7.7.4-746e538da5-10.zip/node_modules/semver/",\
         "packageDependencies": [\
