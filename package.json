@@ -24,14 +24,16 @@
   "author": "Craig McNaughton",
   "license": "GPL-3.0-or-later",
   "devDependencies": {
-    "eslint": "^8.30.0",
-    "eslint-config-standard": "^17.0.0",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-n": "^15.6.0",
-    "eslint-plugin-promise": "^6.1.1",
+    "eslint": "^9.0.0",
+    "neostandard": "^0.13.0",
     "sass": "^1.77.6",
     "vite": "^6.4.2",
     "vite-plugin-pwa": "^0.20.0"
   },
-  "packageManager": "yarn@3.3.0"
+  "packageManager": "yarn@4.9.1",
+  "resolutions": {
+    "ejs": "^5.0.1",
+    "node-gyp": "^12.2.0",
+    "serialize-javascript": "^7.0.5"
+  }
 }
