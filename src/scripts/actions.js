@@ -1,6 +1,7 @@
 import { defaultStore, setStore, getStore } from './store'
 import { show, hide, empty } from './utilities'
 
+// str is always a single character from String.split('') — never null/undefined.
 const escapeHtml = str => str.replace(
   /[&<>"']/g,
   c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])
