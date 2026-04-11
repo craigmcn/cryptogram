@@ -121,8 +121,9 @@ const initCryptogram = () => {
     .split(' ')
     .map((t) => {
       const textLetters = t.split('').map((l) => {
-        const value = letters[l]
-          ? ` value="${letters[l]}" data-old-value="${letters[l]}"`
+        const escapedValue = letters[l] ? escapeHtml(letters[l]) : ''
+        const value = escapedValue
+          ? ` value="${escapedValue}" data-old-value="${escapedValue}"`
           : ''
         const input = l.match(/[A-Z]/)
           ? `<input class="solution__input" type="text" maxlength="2"${value} data-puzzle="${l}">`
