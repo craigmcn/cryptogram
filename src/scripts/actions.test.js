@@ -109,6 +109,12 @@ describe('actions', () => {
       expect(el('cryptogram-solution').innerHTML).toContain(',')
     })
 
+    it('escapes HTML special characters in non-letter positions', () => {
+      submitPuzzle('A<B')
+      expect(el('cryptogram-solution').innerHTML).toContain('&lt;')
+      expect(el('cryptogram-solution').innerHTML).not.toContain('<B')
+    })
+
     it('uppercases the puzzle text', () => {
       submitPuzzle('abc')
       expect(inputFor('A')).not.toBeNull()

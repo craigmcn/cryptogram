@@ -1,6 +1,11 @@
 import { defaultStore, setStore, getStore } from './store'
 import { show, hide, empty } from './utilities'
 
+const escapeHtml = str => str.replace(
+  /[&<>"']/g,
+  c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])
+)
+
 const startCryptogram = document.getElementById('start-cryptogram')
 const cryptogramText = document.getElementById('cryptogram-text')
 const cryptogramSolution = document.getElementById('cryptogram-solution')
@@ -120,9 +125,9 @@ const initCryptogram = () => {
           : ''
         const input = l.match(/[A-Z]/)
           ? `<input class="solution__input" type="text" maxlength="2"${value} data-puzzle="${l}">`
-          : l
+          : escapeHtml(l)
 
-        return `<div class="flex flex--column"><div class="solution__item flex flex--ai-end flex--jc-center">${input}</div><div class="solution__puzzle">${l}</div></div>`
+        return `<div class="flex flex--column"><div class="solution__item flex flex--ai-end flex--jc-center">${input}</div><div class="solution__puzzle">${escapeHtml(l)}</div></div>`
       })
       return `<div class="flex flex__item">${textLetters.join('')}</div>`
     })
