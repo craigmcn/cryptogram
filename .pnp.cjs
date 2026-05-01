@@ -7981,12 +7981,12 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["postcss", [\
-      ["npm:8.5.9", {\
-        "packageLocation": "../../.yarn/berry/cache/postcss-npm-8.5.9-0b69075ff7-10.zip/node_modules/postcss/",\
+      ["npm:8.5.13", {\
+        "packageLocation": "../../.yarn/berry/cache/postcss-npm-8.5.13-a1d77c1b0b-10.zip/node_modules/postcss/",\
         "packageDependencies": [\
           ["nanoid", "npm:3.3.11"],\
           ["picocolors", "npm:1.1.1"],\
-          ["postcss", "npm:8.5.9"],\
+          ["postcss", "npm:8.5.13"],\
           ["source-map-js", "npm:1.2.1"]\
         ],\
         "linkType": "HARD"\
@@ -9351,7 +9351,7 @@ const RAW_RUNTIME_STATE =
           ["less", null],\
           ["lightningcss", null],\
           ["picomatch", "npm:4.0.4"],\
-          ["postcss", "npm:8.5.9"],\
+          ["postcss", "npm:8.5.13"],\
           ["rollup", "npm:4.60.1"],\
           ["sass", "npm:1.77.6"],\
           ["sass-embedded", null],\
