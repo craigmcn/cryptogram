@@ -5,7 +5,7 @@ A vanilla JS progressive web app (PWA) for solving cryptogram puzzles. No framew
 ## Commands
 
 ```bash
-yarn dev              # dev server with PWA enabled (http://localhost:5173)
+yarn dev              # dev server with PWA enabled (http://localhost:3050)
 yarn build            # production build → dist/
 yarn preview          # preview the production build locally
 yarn lint             # ESLint (src/ only)
@@ -141,3 +141,21 @@ The GitHub Actions workflow at [.github/workflows/test.yml](.github/workflows/te
 - GitHub Dependabot is enabled and will open PRs for vulnerable transitive deps
 - When reviewing Dependabot PRs, check whether the alert is already resolved by a `resolutions` entry before merging redundant bumps
 - Node.js target is the current Active LTS — update `.nvmrc` when a new LTS is released
+
+## Modernization status (assessed 2026-05-01)
+
+Cryptogram already meets the cross-repo standard baseline. No PRs are needed for infrastructure.
+
+**Completed:**
+- Node 24, Yarn 4, ESLint 9 flat config, Vitest 4, 100% test coverage
+- `.github/workflows/test.yml` — lint → build → test:run on PR + push to `main`, corepack step
+- `.github/CODEOWNERS` — `* @craigmcn`
+- Branch protection ruleset 14954844 — 1 required approval, Admin role bypass, dismiss stale reviews, require `test` status check, block deletions + force pushes
+- TypeScript — intentionally N/A (vanilla JS PWA by design)
+
+**Outstanding TODOs:**
+- [ ] **`vite-plugin-pwa` 0.20.x → 1.x** — blocked: `vite-plugin-pwa@1.2.0` pulls in `workbox-build@7.4.0` which depends on `glob@^11.0.1` (ESM-only); `glob@11` is incompatible with Yarn PnP's virtual filesystem (EBADF in `createCJSModuleWrap`)
+- [ ] **Vite 6 → 8** — blocked: `vite-plugin-pwa@1.2.0` peer dep only covers up to Vite 7; blocked behind the above
+- [ ] **Node 24.15.0 regression** — `yarn build` fails locally on Node 24.15.0 (EBADF in PnP ESM loader); CI is unaffected (uses `.nvmrc` → 24.14.1). Stay on 24.14.1 until a patch is released.
+
+**Key decision:** TypeScript migration is not planned — this is an intentional vanilla JS app and the toolchain is otherwise current.
