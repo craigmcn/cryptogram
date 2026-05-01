@@ -50,7 +50,7 @@ yarn install
 ### Commands
 
 ```bash
-yarn dev           # dev server at http://localhost:5173
+yarn dev           # dev server at http://localhost:3050
 yarn build         # production build → dist/
 yarn preview       # preview the production build locally
 yarn lint          # ESLint
