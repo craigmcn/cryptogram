@@ -83,7 +83,7 @@ index.html             # Static shell — all sections present in HTML, shown/hi
 
 Formatting is handled by **Prettier** (`.prettierrc.json`). ESLint is configured in [eslint.config.js](eslint.config.js) using `neostandard({ noStyle: true })` — stylistic rules are disabled and deferred to Prettier. `eslint-config-prettier` is appended to turn off any remaining ESLint formatting rules.
 
-Prettier config (`.prettierrc.json`): no semicolons, single quotes, no trailing commas. Arrow parens default to `"always"` (Prettier default).
+Prettier config (`.prettierrc.json`): all defaults — double quotes, semicolons, trailing commas (`"all"`), arrow parens (`"always"`).
 
 The only custom ESLint rule is `no-console: warn`.
 
