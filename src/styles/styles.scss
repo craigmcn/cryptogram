@@ -9,101 +9,101 @@ $redDarkMode: #f49090;
 
 /* Alphabet grid */
 .alpha {
-    width: 100%;
+  width: 100%;
 
-    &__letter {
-        font-size: 1.4rem;
-        margin: 0.16667rem;
-        padding: 0.33333rem;
-        text-align: center;
-        width: 2rem;
-    }
+  &__letter {
+    font-size: 1.4rem;
+    margin: 0.16667rem;
+    padding: 0.33333rem;
+    text-align: center;
+    width: 2rem;
+  }
 }
 
 /* Solution Grid */
 .solution {
-    &__item {
-        height: 2rem;
-        min-width: 1rem;
+  &__item {
+    height: 2rem;
+    min-width: 1rem;
+  }
+
+  &__input {
+    border: 1px solid #444;
+    color: #444;
+    height: 100%;
+    width: 2rem;
+    text-align: center;
+
+    &.active {
+      border-color: $green;
     }
+  }
 
-    &__input {
-        border: 1px solid #444;
-        color: #444;
-        height: 100%;
-        width: 2rem;
-        text-align: center;
+  &__puzzle {
+    text-align: center;
+  }
 
-        &.active {
-            border-color: $green;
-        }
+  &--complete {
+    background-color: rgba($green, 0.05);
+    border: 1px solid $green;
+    border-radius: 0.25rem;
+
+    & .solution__input {
+      border-color: $green;
+      border-width: 1px;
     }
+  }
 
-    &__puzzle {
-        text-align: center;
-    }
-
-    &--complete {
-        background-color: rgba($green, 0.05);
-        border: 1px solid $green;
-        border-radius: 0.25rem;
-
-        & .solution__input {
-            border-color: $green;
-            border-width: 1px;
-        }
-    }
-
-    &>.flex__item {
-        // AlbertCSS default for `.flex__item` is `flex-grow: 1`
-        flex-grow: 0;
-    }
+  & > .flex__item {
+    // AlbertCSS default for `.flex__item` is `flex-grow: 1`
+    flex-grow: 0;
+  }
 }
 
 /* Highlight */
 .used {
-    color: #444;
-    background-color: #ddd;
+  color: #444;
+  background-color: #ddd;
 
-    &.error {
-        color: $red;
-        background-color: lighten($red, 45%);
-    }
+  &.error {
+    color: $red;
+    background-color: lighten($red, 45%);
+  }
 }
 
 /* Icons */
 .icon {
-    display: inline-block;
-    height: 1em;
-    vertical-align: -.125em;
+  display: inline-block;
+  height: 1em;
+  vertical-align: -0.125em;
 }
 
 @media (prefers-color-scheme: dark) {
-    .solution {    
-        &__input {
-            background-color: #444;
-            border-color: #ddd;
-            color: #ddd;
-            &.active {
-                border-color: $greenDarkMode;
-            }
-        }
-    
-        &--complete {
-            background-color: rgba($greenDarkMode, 0.05);
-            border-color: $greenDarkMode;
-    
-            & .solution__input {
-                border-color: $greenDarkMode;
-            }
-        }
+  .solution {
+    &__input {
+      background-color: #444;
+      border-color: #ddd;
+      color: #ddd;
+      &.active {
+        border-color: $greenDarkMode;
+      }
     }
-    .used {
-        color: #ddd;
-        background-color: #444;
-        &.error {
-            color: $redDarkMode;
-            background-color: darken($redDarkMode, 45%);
-        }
+
+    &--complete {
+      background-color: rgba($greenDarkMode, 0.05);
+      border-color: $greenDarkMode;
+
+      & .solution__input {
+        border-color: $greenDarkMode;
+      }
     }
+  }
+  .used {
+    color: #ddd;
+    background-color: #444;
+    &.error {
+      color: $redDarkMode;
+      background-color: darken($redDarkMode, 45%);
+    }
+  }
 }

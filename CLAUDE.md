@@ -8,6 +8,8 @@ A vanilla JS progressive web app (PWA) for solving cryptogram puzzles. No framew
 yarn dev              # dev server with PWA enabled (http://localhost:3050)
 yarn build            # production build → dist/
 yarn preview          # preview the production build locally
+yarn format           # Prettier — reformat all files in place
+yarn format:check     # Prettier — check only (used by pre-commit hook and CI)
 yarn lint             # ESLint (src/ only)
 yarn lint:fix         # ESLint with auto-fix
 yarn test             # Vitest in watch mode
@@ -61,32 +63,35 @@ index.html             # Static shell — all sections present in HTML, shown/hi
 
 ## Toolchain
 
-| Tool | Version | Purpose |
-|---|---|---|
-| Node.js | 24.14.1 (LTS) | Runtime (see `.nvmrc`) |
-| Yarn | 4.9.1 | Package manager (Berry/PnP) |
-| Vite | ^6 | Bundler + dev server |
-| Sass | ^1 | SCSS compilation via Vite |
-| vite-plugin-pwa | ^0.20 | Service worker + web manifest |
-| ESLint | ^9 | Linting (flat config) |
-| neostandard | ^0.13 | ESLint rule set (successor to eslint-config-standard) |
-| Vitest | ^4 | Test runner (jsdom environment) |
-| @vitest/coverage-v8 | ^4 | V8 coverage reports |
-| @vitest/eslint-plugin | ^1 | ESLint globals for test files |
-| Husky | ^9 | Git hooks |
+| Tool                   | Version       | Purpose                                               |
+| ---------------------- | ------------- | ----------------------------------------------------- |
+| Node.js                | 24.14.1 (LTS) | Runtime (see `.nvmrc`)                                |
+| Yarn                   | 4.9.1         | Package manager (Berry/PnP)                           |
+| Vite                   | ^6            | Bundler + dev server                                  |
+| Sass                   | ^1            | SCSS compilation via Vite                             |
+| vite-plugin-pwa        | ^0.20         | Service worker + web manifest                         |
+| ESLint                 | ^9            | Linting (flat config)                                 |
+| neostandard            | ^0.13         | ESLint rule set (successor to eslint-config-standard) |
+| eslint-config-prettier | ^10           | Disables ESLint formatting rules deferred to Prettier |
+| Prettier               | ^3            | Code formatter (JS, HTML, CSS/SCSS, JSON, YAML, MD)   |
+| Vitest                 | ^4            | Test runner (jsdom environment)                       |
+| @vitest/coverage-v8    | ^4            | V8 coverage reports                                   |
+| @vitest/eslint-plugin  | ^1            | ESLint globals for test files                         |
+| Husky                  | ^9            | Git hooks                                             |
 
 ## Code style
 
-ESLint is configured in [eslint.config.js](eslint.config.js) using `neostandard` as the base. Key rules:
+Formatting is handled by **Prettier** (`.prettierrc.json`). ESLint is configured in [eslint.config.js](eslint.config.js) using `neostandard({ noStyle: true })` — stylistic rules are disabled and deferred to Prettier. `eslint-config-prettier` is appended to turn off any remaining ESLint formatting rules.
 
-- **2-space indentation**, single quotes, no semicolons (neostandard defaults)
-- **No trailing commas** (neostandard default)
-- **Arrow parens** only when required for block bodies
-- `no-console` is a warning, not an error
+Prettier config (`.prettierrc.json`): no semicolons, single quotes, no trailing commas. Arrow parens default to `"always"` (Prettier default).
+
+The only custom ESLint rule is `no-console: warn`.
 
 For test files (`src/**/*.test.js`), `@vitest/eslint-plugin` is applied to provide vitest globals (`describe`, `it`, `expect`, `vi`, etc.) and `FocusEvent` (absent from the `globals` package's browser set).
 
-Run `yarn lint` before committing. `yarn lint:fix` handles anything auto-fixable.
+Run `yarn format:check && yarn lint` before committing. `yarn format` and `yarn lint:fix` handle auto-fixes.
+
+`.vscode/settings.json` enables format-on-save with Prettier as the default formatter for all file types.
 
 ## Dependencies
 
@@ -94,11 +99,11 @@ All dependencies are `devDependencies` — nothing is shipped at runtime except 
 
 The `resolutions` field in [package.json](package.json) pins several transitive dependencies to patched versions to satisfy security advisories. Do not remove these without checking whether the underlying packages have been updated:
 
-| Resolution | Reason |
-|---|---|
-| `ejs ^5.0.1` | Drops `jake`→`filelist`→`minimatch@5.x` chain (ReDoS) |
-| `node-gyp ^12.2.0` | Replaces old networking stack that included vulnerable `ip` package |
-| `serialize-javascript ^7.0.5` | RCE/DoS fix used by `@rollup/plugin-terser` |
+| Resolution                    | Reason                                                              |
+| ----------------------------- | ------------------------------------------------------------------- |
+| `ejs ^5.0.1`                  | Drops `jake`→`filelist`→`minimatch@5.x` chain (ReDoS)               |
+| `node-gyp ^12.2.0`            | Replaces old networking stack that included vulnerable `ip` package |
+| `serialize-javascript ^7.0.5` | RCE/DoS fix used by `@rollup/plugin-terser`                         |
 
 ## Yarn (Berry / PnP)
 
@@ -131,7 +136,7 @@ Tests are co-located with source files (`*.test.js`). The jsdom environment is c
 
 Current coverage: **100%** statements, branches, functions, and lines.
 
-The pre-commit hook (`.husky/pre-commit`) runs `yarn lint && yarn test:run` before every commit. The `prepare` script ensures Husky is installed automatically after `yarn install`.
+The pre-commit hook (`.husky/pre-commit`) runs `yarn format:check && yarn lint && yarn test:run` before every commit. The `prepare` script ensures Husky is installed automatically after `yarn install`.
 
 The GitHub Actions workflow at [.github/workflows/test.yml](.github/workflows/test.yml) runs lint and tests on every push to `main` and on every PR.
 
@@ -147,13 +152,15 @@ The GitHub Actions workflow at [.github/workflows/test.yml](.github/workflows/te
 Cryptogram already meets the cross-repo standard baseline. No PRs are needed for infrastructure.
 
 **Completed:**
-- Node 24, Yarn 4, ESLint 9 flat config, Vitest 4, 100% test coverage
+
+- Node 24, Yarn 4, ESLint 9 flat config, Vitest 4, 100% test coverage, Prettier
 - `.github/workflows/test.yml` — lint → build → test:coverage on PR + push to `main`, corepack step
 - `.github/CODEOWNERS` — `* @craigmcn`
 - Branch protection ([ruleset](https://github.com/craigmcn/cryptogram/rules/14954844)) — 1 required approval, Admin role bypass, dismiss stale reviews, require `test` status check, block deletions + force pushes
 - TypeScript — intentionally N/A (vanilla JS PWA by design)
 
 **Outstanding TODOs:**
+
 - [ ] **`vite-plugin-pwa` 0.20.x → 1.x** — blocked: `vite-plugin-pwa@1.2.0` pulls in `workbox-build@7.4.0` which depends on `glob@^11.0.1` (ESM-only); `glob@11` is incompatible with Yarn PnP's virtual filesystem (EBADF in `createCJSModuleWrap`)
 - [ ] **Vite 6 → 8** — blocked: `vite-plugin-pwa@1.2.0` peer dep only covers up to Vite 7; blocked behind the above
 - [ ] **Node version** — do not upgrade past 24.14.1 locally until the PnP ESM loader regression (EBADF in `createCJSModuleWrap`) is confirmed fixed in a later Node 24 release. CI is unaffected (uses `.nvmrc`).

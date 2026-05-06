@@ -6,7 +6,7 @@ A handy helper for solving cryptogram puzzles — track your letter substitution
 
 ## Using the app
 
-A cryptogram is a short piece of encrypted text where each letter of the alphabet has been substituted for another. To decode it, you work out which cipher letter maps to which real letter, usually by recognising common words and patterns.
+A cryptogram is a short piece of encrypted text where each letter of the alphabet has been substituted for another. To decode it, you work out which cipher letter maps to which real letter, usually by recognizing common words and patterns.
 
 ### Getting started
 
@@ -26,11 +26,11 @@ Your progress is saved automatically and restored if you close and reopen the pa
 
 The app can be installed on your device and used offline.
 
-**On desktop (Chrome, Edge):** click the install icon in the address bar, or open the browser menu and choose *Install Cryptogram*.
+**On desktop (Chrome, Edge):** click the install icon in the address bar, or open the browser menu and choose _Install Cryptogram_.
 
-**On iOS (Safari):** tap the Share button, then *Add to Home Screen*.
+**On iOS (Safari):** tap the Share button, then _Add to Home Screen_.
 
-**On Android (Chrome):** tap the browser menu and choose *Add to Home Screen* or *Install app*.
+**On Android (Chrome):** tap the browser menu and choose _Add to Home Screen_ or _Install app_.
 
 Once installed, the app runs in its own window without browser chrome and works fully offline. When a new version is available it will prompt you to reload.
 
