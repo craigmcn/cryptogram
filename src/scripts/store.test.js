@@ -1,5 +1,11 @@
 import { describe, it, expect, beforeEach } from 'vitest'
-import { STORAGEID, defaultStore, getStore, setStore, deleteStore } from './store'
+import {
+  STORAGEID,
+  defaultStore,
+  getStore,
+  setStore,
+  deleteStore
+} from './store'
 
 describe('store', () => {
   beforeEach(() => {
@@ -13,7 +19,9 @@ describe('store', () => {
 
     it('has all 26 letters mapped to empty strings', () => {
       expect(Object.keys(defaultStore.letters)).toHaveLength(26)
-      expect(Object.values(defaultStore.letters).every(v => v === '')).toBe(true)
+      expect(Object.values(defaultStore.letters).every((v) => v === '')).toBe(
+        true
+      )
     })
   })
 

@@ -8,7 +8,7 @@ export default defineConfig({
       provider: 'v8',
       reporter: ['text', 'html'],
       include: ['src/scripts/**'],
-      exclude: ['**/*.test.js', 'src/test/**'],
-    },
-  },
+      exclude: ['**/*.test.js', 'src/test/**']
+    }
+  }
 })

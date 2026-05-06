@@ -2,10 +2,14 @@ import { defaultStore, setStore, getStore } from './store'
 import { show, hide, empty } from './utilities'
 
 // str is always a single character from String.split('') — never null/undefined.
-const escapeHtml = str => str.replace(
-  /[&<>"']/g,
-  c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])
-)
+const escapeHtml = (str) =>
+  str.replace(
+    /[&<>"']/g,
+    (c) =>
+      ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[
+        c
+      ]
+  )
 
 const startCryptogram = document.getElementById('start-cryptogram')
 const cryptogramText = document.getElementById('cryptogram-text')
@@ -20,7 +24,7 @@ const resetAlphabet = () => {
     l.dataset.count = 0
 
     const usedCount = Object.values(letters).filter(
-      v => v === l.dataset.letter
+      (v) => v === l.dataset.letter
     ).length
     updateCount(l, usedCount)
   })
@@ -29,7 +33,7 @@ const resetAlphabet = () => {
 const setActive = (e) => {
   cryptogramSolution
     .querySelectorAll('.solution__input')
-    .forEach(el =>
+    .forEach((el) =>
       el.classList.toggle(
         'active',
         el.dataset.puzzle === e.target.dataset.puzzle

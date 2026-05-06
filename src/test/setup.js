@@ -4,7 +4,10 @@
 
 const alphaLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
   .split('')
-  .map(l => `<div class="alpha__letter" data-letter="${l}" data-count="0">${l}</div>`)
+  .map(
+    (l) =>
+      `<div class="alpha__letter" data-letter="${l}" data-count="0">${l}</div>`
+  )
   .join('\n    ')
 
 document.body.innerHTML = `

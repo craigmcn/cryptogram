@@ -1,2 +1,4 @@
 #!/usr/bin/env sh
-yarn lint && yarn test:run
+. ~/.nvm/nvm.sh
+nvm use --silent
+yarn format:check && yarn lint && yarn test:run

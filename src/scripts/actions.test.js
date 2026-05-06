@@ -4,7 +4,7 @@ import { defaultStore, getStore, setStore } from './store'
 
 // ─── DOM helpers ─────────────────────────────────────────────────────────────
 
-const el = id => document.getElementById(id)
+const el = (id) => document.getElementById(id)
 
 const resetDOM = () => {
   localStorage.clear()
@@ -17,13 +17,15 @@ const resetDOM = () => {
   el('alpha').setAttribute('hidden', '')
   el('action-buttons').setAttribute('hidden', '')
 
-  el('alpha').querySelectorAll('.alpha__letter').forEach((l) => {
-    l.classList.remove('used', 'error')
-    l.dataset.count = 0
-  })
+  el('alpha')
+    .querySelectorAll('.alpha__letter')
+    .forEach((l) => {
+      l.classList.remove('used', 'error')
+      l.dataset.count = 0
+    })
 
-  el('cryptogram-text').parentElement
-    .querySelector('.form__control-error')
+  el('cryptogram-text')
+    .parentElement.querySelector('.form__control-error')
     .setAttribute('hidden', '')
 }
 
@@ -40,15 +42,15 @@ const typeInto = (inputEl, value) => {
 }
 
 // Return the first solution input for a given puzzle letter.
-const inputFor = letter =>
+const inputFor = (letter) =>
   el('cryptogram-solution').querySelector(`[data-puzzle="${letter}"]`)
 
 // Return all solution inputs for a given puzzle letter.
-const inputsFor = letter =>
+const inputsFor = (letter) =>
   el('cryptogram-solution').querySelectorAll(`[data-puzzle="${letter}"]`)
 
 // Return the alphabet tile for a given letter.
-const alphaTile = letter =>
+const alphaTile = (letter) =>
   el('alpha').querySelector(`[data-letter="${letter}"]`)
 
 // ─── Tests ────────────────────────────────────────────────────────────────────
@@ -61,16 +63,18 @@ describe('actions', () => {
   describe('start()', () => {
     it('shows the error element when textarea is empty', () => {
       submitPuzzle('')
-      const errorEl = el('cryptogram-text').parentElement
-        .querySelector('.form__control-error')
+      const errorEl = el('cryptogram-text').parentElement.querySelector(
+        '.form__control-error'
+      )
       expect(errorEl.hasAttribute('hidden')).toBe(false)
     })
 
     it('hides a previously shown error on next submit', () => {
       submitPuzzle('')
       submitPuzzle('ABC')
-      const errorEl = el('cryptogram-text').parentElement
-        .querySelector('.form__control-error')
+      const errorEl = el('cryptogram-text').parentElement.querySelector(
+        '.form__control-error'
+      )
       expect(errorEl.hasAttribute('hidden')).toBe(true)
     })
 
@@ -98,13 +102,16 @@ describe('actions', () => {
 
     it('renders an input for each letter in the puzzle', () => {
       submitPuzzle('ABC')
-      expect(el('cryptogram-solution').querySelectorAll('.solution__input'))
-        .toHaveLength(3)
+      expect(
+        el('cryptogram-solution').querySelectorAll('.solution__input')
+      ).toHaveLength(3)
     })
 
     it('renders non-letter characters as plain text nodes', () => {
       submitPuzzle('A,B')
-      const inputs = el('cryptogram-solution').querySelectorAll('.solution__input')
+      const inputs = el('cryptogram-solution').querySelectorAll(
+        '.solution__input'
+      )
       expect(inputs).toHaveLength(2)
       expect(el('cryptogram-solution').innerHTML).toContain(',')
     })
@@ -159,8 +166,9 @@ describe('actions', () => {
     it('removes the solution--complete class', () => {
       el('cryptogram-solution').classList.add('solution--complete')
       restart()
-      expect(el('cryptogram-solution').classList.contains('solution--complete'))
-        .toBe(false)
+      expect(
+        el('cryptogram-solution').classList.contains('solution--complete')
+      ).toBe(false)
     })
   })
 
@@ -202,14 +210,16 @@ describe('actions', () => {
     it('resets all letters to empty in the store', () => {
       clear()
       const { letters } = getStore()
-      expect(Object.values(letters).every(v => v === '')).toBe(true)
+      expect(Object.values(letters).every((v) => v === '')).toBe(true)
     })
 
     it('clears all input values in the solution grid', () => {
       clear()
-      el('cryptogram-solution').querySelectorAll('.solution__input').forEach((i) => {
-        expect(i.value).toBe('')
-      })
+      el('cryptogram-solution')
+        .querySelectorAll('.solution__input')
+        .forEach((i) => {
+          expect(i.value).toBe('')
+        })
     })
 
     it('removes used/error classes from alphabet tiles', () => {
@@ -232,8 +242,9 @@ describe('actions', () => {
       setStore({ text: 'XYZ' })
       load()
       expect(el('start-cryptogram').hasAttribute('hidden')).toBe(true)
-      expect(el('cryptogram-solution').querySelectorAll('.solution__input'))
-        .toHaveLength(3)
+      expect(
+        el('cryptogram-solution').querySelectorAll('.solution__input')
+      ).toHaveLength(3)
     })
   })
 
@@ -261,7 +272,7 @@ describe('actions', () => {
     it('updates all inputs sharing the same puzzle letter', () => {
       submitPuzzle('ABA')
       typeInto(inputsFor('A')[0], 'X')
-      inputsFor('A').forEach(i => expect(i.value).toBe('X'))
+      inputsFor('A').forEach((i) => expect(i.value).toBe('X'))
     })
 
     it('rejects input matching the puzzle letter', () => {
@@ -312,8 +323,9 @@ describe('actions', () => {
       typeInto(inputFor('A'), 'X')
       typeInto(inputFor('B'), 'Y')
       typeInto(inputFor('C'), 'Z')
-      expect(el('cryptogram-solution').classList.contains('solution--complete'))
-        .toBe(true)
+      expect(
+        el('cryptogram-solution').classList.contains('solution--complete')
+      ).toBe(true)
     })
 
     it('removes solution--complete when a duplicate letter is used', () => {
@@ -321,8 +333,9 @@ describe('actions', () => {
       typeInto(inputFor('B'), 'Y')
       typeInto(inputFor('C'), 'Z')
       typeInto(inputFor('B'), 'X')
-      expect(el('cryptogram-solution').classList.contains('solution--complete'))
-        .toBe(false)
+      expect(
+        el('cryptogram-solution').classList.contains('solution--complete')
+      ).toBe(false)
     })
 
     it('removes solution--complete when an input is cleared', () => {
@@ -330,8 +343,9 @@ describe('actions', () => {
       typeInto(inputFor('B'), 'Y')
       typeInto(inputFor('C'), 'Z')
       typeInto(inputFor('A'), '')
-      expect(el('cryptogram-solution').classList.contains('solution--complete'))
-        .toBe(false)
+      expect(
+        el('cryptogram-solution').classList.contains('solution--complete')
+      ).toBe(false)
     })
   })
 
@@ -341,19 +355,29 @@ describe('actions', () => {
     beforeEach(() => submitPuzzle('ABA'))
 
     it('adds active class to all inputs sharing the focused puzzle letter', () => {
-      inputsFor('A')[0].dispatchEvent(new FocusEvent('focus', { bubbles: true }))
-      inputsFor('A').forEach(i => expect(i.classList.contains('active')).toBe(true))
+      inputsFor('A')[0].dispatchEvent(
+        new FocusEvent('focus', { bubbles: true })
+      )
+      inputsFor('A').forEach((i) =>
+        expect(i.classList.contains('active')).toBe(true)
+      )
     })
 
     it('removes active class from inputs with a different puzzle letter', () => {
-      inputsFor('A')[0].dispatchEvent(new FocusEvent('focus', { bubbles: true }))
+      inputsFor('A')[0].dispatchEvent(
+        new FocusEvent('focus', { bubbles: true })
+      )
       expect(inputFor('B').classList.contains('active')).toBe(false)
     })
 
     it('updates active class correctly when focus moves to a different letter', () => {
-      inputsFor('A')[0].dispatchEvent(new FocusEvent('focus', { bubbles: true }))
+      inputsFor('A')[0].dispatchEvent(
+        new FocusEvent('focus', { bubbles: true })
+      )
       inputFor('B').dispatchEvent(new FocusEvent('focus', { bubbles: true }))
-      inputsFor('A').forEach(i => expect(i.classList.contains('active')).toBe(false))
+      inputsFor('A').forEach((i) =>
+        expect(i.classList.contains('active')).toBe(false)
+      )
       expect(inputFor('B').classList.contains('active')).toBe(true)
     })
   })
@@ -369,7 +393,10 @@ describe('actions', () => {
     })
 
     it('marks error when the same solution letter appears more than once in store', () => {
-      setStore({ text: 'AB', letters: { ...defaultStore.letters, A: 'X', B: 'X' } })
+      setStore({
+        text: 'AB',
+        letters: { ...defaultStore.letters, A: 'X', B: 'X' }
+      })
       load()
       expect(alphaTile('X').classList.contains('error')).toBe(true)
       expect(alphaTile('X').dataset.count).toBe('2')

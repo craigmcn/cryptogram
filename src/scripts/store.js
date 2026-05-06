@@ -28,8 +28,8 @@ export const defaultStore = {
     W: '',
     X: '',
     Y: '',
-    Z: '',
-  },
+    Z: ''
+  }
 }
 
 export const getStore = () => {
@@ -45,8 +45,8 @@ export const setStore = ({ text, letters }) => {
     text: text || text === '' ? text : prevStore.text,
     letters: {
       ...prevStore.letters,
-      ...letters,
-    },
+      ...letters
+    }
   }
   window.localStorage.setItem(STORAGEID, JSON.stringify(store))
 }

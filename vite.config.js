@@ -5,21 +5,21 @@ import { VitePWA } from 'vite-plugin-pwa'
 export default defineConfig({
   base: './',
   server: {
-    port: 3050,
+    port: 3050
   },
   build: {
     rollupOptions: {
       output: [
         { dir: 'dist' },
-        { dir: 'dist/cryptogram' }, // For Netlify subdirectory
-      ],
-    },
+        { dir: 'dist/cryptogram' } // For Netlify subdirectory
+      ]
+    }
   },
   plugins: [
     VitePWA({
       registerType: 'autoUpdate',
       devOptions: {
-        enabled: true,
+        enabled: true
       },
       manifest: {
         id: '/cryptogram/?source=pwa',
@@ -29,25 +29,25 @@ export default defineConfig({
           {
             src: '/android-chrome-192x192.png?v=eEvolvQr5k',
             sizes: '192x192',
-            type: 'image/png',
+            type: 'image/png'
           },
           {
             src: '/android-chrome-256x256.png?v=eEvolvQr5k',
             sizes: '256x256',
-            type: 'image/png',
+            type: 'image/png'
           },
           {
             src: '/android-chrome-512x512.png?v=eEvolvQr5k',
             sizes: '512x512',
-            type: 'image/png',
-          },
+            type: 'image/png'
+          }
         ],
         start_url: '/cryptogram/?source=pwa',
         theme_color: '#005b99',
         background_color: '#ffffff',
         display: 'standalone',
-        scope: '/cryptogram',
-      },
-    }),
-  ],
+        scope: '/cryptogram'
+      }
+    })
+  ]
 })

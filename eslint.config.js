@@ -1,13 +1,13 @@
 import vitest from '@vitest/eslint-plugin'
+import eslintConfigPrettier from 'eslint-config-prettier'
 import neostandard from 'neostandard'
 
 export default [
-  ...neostandard({ browser: true }),
+  ...neostandard({ browser: true, noStyle: true }),
   {
     rules: {
-      '@stylistic/arrow-parens': ['error', 'as-needed', { requireForBlockBody: true }],
-      'no-console': 'warn',
-    },
+      'no-console': 'warn'
+    }
   },
   {
     files: ['src/**/*.test.js'],
@@ -15,8 +15,9 @@ export default [
     languageOptions: {
       globals: {
         ...vitest.environments.env.globals,
-        FocusEvent: 'readonly',
-      },
-    },
+        FocusEvent: 'readonly'
+      }
+    }
   },
+  eslintConfigPrettier
 ]
