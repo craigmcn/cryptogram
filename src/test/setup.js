@@ -2,13 +2,13 @@
 // This file runs before any test module is imported, ensuring
 // document.getElementById() calls in actions.js resolve correctly.
 
-const alphaLetters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-  .split('')
+const alphaLetters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+  .split("")
   .map(
     (l) =>
-      `<div class="alpha__letter" data-letter="${l}" data-count="0">${l}</div>`
+      `<div class="alpha__letter" data-letter="${l}" data-count="0">${l}</div>`,
   )
-  .join('\n    ')
+  .join("\n    ");
 
 document.body.innerHTML = `
   <section id="start-cryptogram">
@@ -29,4 +29,4 @@ document.body.innerHTML = `
     <button id="clear-button">Clear</button>
     <button id="new-button">New puzzle</button>
   </aside>
-`
+`;
