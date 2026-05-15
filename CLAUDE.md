@@ -7,6 +7,7 @@ A vanilla JS progressive web app (PWA) for solving cryptogram puzzles. No framew
 ```bash
 yarn dev              # dev server with PWA enabled (http://localhost:3050)
 yarn build            # production build → dist/
+yarn build:netlify    # dual build → netlify/ and netlify/cryptogram/
 yarn preview          # preview the production build locally
 yarn format           # Prettier — reformat all files in place
 yarn format:check     # Prettier — check only (used by pre-commit hook and CI)
@@ -116,10 +117,8 @@ After changing dependencies, commit the updated `yarn.lock` together.
 
 ## Build output
 
-`yarn build` produces two output directories (both committed to `dist/` on deploy):
-
-- `dist/` — root output
-- `dist/cryptogram/` — subdirectory build for Netlify deployment under `/cryptogram/`
+- `yarn build` → `dist/` (standard Vite output)
+- `yarn build:netlify` → `netlify/` (root) + `netlify/cryptogram/` (subdirectory for Netlify deployment under `/cryptogram/`); `netlify/` is gitignored
 
 The `base: './'` in [vite.config.ts](vite.config.ts) ensures asset paths are relative.
 
