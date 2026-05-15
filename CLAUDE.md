@@ -152,16 +152,24 @@ Cryptogram meets the cross-repo standard baseline.
 
 **Completed:**
 
-- Node 24, Yarn 4.14.1 (node-modules linker), ESLint 9 flat config, Vitest 4, 100% test coverage, Prettier
+- Node 24, Yarn 4.14.1 (node-modules linker), ESLint 9 flat config, Vitest 4, 100% test coverage
+- Prettier 3 — `eslint-config-prettier` + `neostandard({ noStyle: true })`; `.prettierrc.json: {}` (all defaults)
+- `.editorconfig` — single `[*]` block covering all file types
+- `.vscode/settings.json` — `formatOnSave: true`, Prettier as default formatter
+- Pre-commit hook — `yarn format:check && yarn lint && yarn test:run`
 - `vite.config.ts` (renamed from `.js`)
-- `.github/workflows/test.yml` — lint → build → test:coverage on PR + push to `main`, corepack step
+- Yarn PnP → node-modules linker (eliminates Node 24.x EBADF regression in PnP ESM loader)
+- `.github/workflows/test.yml` — format:check → lint → build → test:coverage on PR + push to `main`
 - `.github/CODEOWNERS` — `* @craigmcn`
 - Branch protection ([ruleset](https://github.com/craigmcn/cryptogram/rules/14954844)) — 1 required approval, Admin role bypass, dismiss stale reviews, require `test` status check, block deletions + force pushes
-- TypeScript — intentionally N/A (vanilla JS PWA by design)
 
 **Outstanding TODOs:**
 
 - [ ] **`vite-plugin-pwa` 0.20.x → 1.x** — blocked: `vite-plugin-pwa@1.2.0` pulls in `workbox-build@7.4.0` which depends on `glob@^11.0.1` (ESM-only); `glob@11` dropped CJS support
 - [ ] **Vite 6 → 8** — blocked: `vite-plugin-pwa@1.2.0` peer dep only covers up to Vite 7; blocked behind the above
 
-**Key decision:** TypeScript migration is not planned — this is an intentional vanilla JS app and the toolchain is otherwise current.
+**Key decisions:**
+
+- TypeScript migration is not planned — intentional vanilla JS app; toolchain is otherwise current
+- Prettier uses all defaults (`.prettierrc.json: {}`) — maximizes standard behavior, minimizes custom rules; `neostandard({ noStyle: true })` defers all formatting to Prettier and drops the custom `@stylistic/arrow-parens` rule
+- node-modules linker chosen over PnP — aligns with all other Yarn 4 repos in the suite; also unblocked local development on Node 24.15.0 where the PnP ESM loader had an EBADF regression
