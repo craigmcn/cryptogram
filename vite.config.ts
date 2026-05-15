@@ -7,14 +7,6 @@ export default defineConfig({
   server: {
     port: 3050,
   },
-  build: {
-    rollupOptions: {
-      output: [
-        { dir: "dist" },
-        { dir: "dist/cryptogram" }, // For Netlify subdirectory
-      ],
-    },
-  },
   plugins: [
     VitePWA({
       registerType: "autoUpdate",
