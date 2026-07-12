@@ -100,11 +100,16 @@ All dependencies are `devDependencies` — nothing is shipped at runtime except 
 
 The `resolutions` field in [package.json](package.json) pins several transitive dependencies to patched versions to satisfy security advisories. Do not remove these without checking whether the underlying packages have been updated:
 
-| Resolution                    | Reason                                                              |
-| ----------------------------- | ------------------------------------------------------------------- |
-| `ejs ^5.0.1`                  | Drops `jake`→`filelist`→`minimatch@5.x` chain (ReDoS)               |
-| `node-gyp ^12.2.0`            | Replaces old networking stack that included vulnerable `ip` package |
-| `serialize-javascript ^7.0.5` | RCE/DoS fix used by `@rollup/plugin-terser`                         |
+| Resolution                    | Reason                                                                                                      |
+| ----------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `@babel/core ^7.29.6`         | Arbitrary file read via sourceMappingURL comment (CVE low); stays on 7.x to avoid major-version surprise    |
+| `ejs ^5.0.1`                  | Drops `jake`→`filelist`→`minimatch@5.x` chain (ReDoS)                                                       |
+| `js-yaml ^4.2.0`              | Quadratic DoS via repeated YAML merge-key aliases (CVE medium)                                              |
+| `node-gyp ^12.2.0`            | Replaces old networking stack that included vulnerable `ip` package                                         |
+| `semver ^7.5.2`               | ReDoS floor                                                                                                 |
+| `serialize-javascript ^7.0.5` | RCE/DoS fix used by `@rollup/plugin-terser`                                                                 |
+| `tar ^7.5.16`                 | PAX size-override file-smuggling (CVE medium)                                                               |
+| `vite ^6.4.3`                 | Forces `vite-plugin-pwa` off its `^6\|\|^7\|\|^8` range (was resolving to vulnerable 8.0.8); CVE-2026-53571 |
 
 ## Yarn (Berry)
 
@@ -145,7 +150,7 @@ The GitHub Actions workflow at [.github/workflows/test.yml](.github/workflows/te
 - When reviewing Dependabot PRs, check whether the alert is already resolved by a `resolutions` entry before merging redundant bumps
 - Node.js target is the current Active LTS — update `.nvmrc` when a new LTS is released
 
-## Modernization status (assessed 2026-05-06)
+## Modernization status (assessed 2026-06-16)
 
 Cryptogram meets the cross-repo standard baseline.
 
@@ -164,11 +169,13 @@ Cryptogram meets the cross-repo standard baseline.
 
 **Outstanding TODOs:**
 
-- [ ] **`vite-plugin-pwa` 0.20.x → 1.x** — blocked: `vite-plugin-pwa@1.2.0` pulls in `workbox-build@7.4.0` which depends on `glob@^11.0.1` (ESM-only); `glob@11` dropped CJS support
-- [ ] **Vite 6 → 8** — blocked: `vite-plugin-pwa@1.2.0` peer dep only covers up to Vite 7; blocked behind the above
+- **PR #68** (open) — security resolutions for vite, js-yaml, tar, @babel/core; awaiting review and merge
+- Remaining TODOs (vite-plugin-pwa 1.x upgrade, Vite 8 upgrade, both blocked upstream; GitHub Actions bump; axe tooling; Playwright E2E) tracked as issues in the [cryptogram GitHub Project](https://github.com/users/craigmcn/projects/3)
 
 **Key decisions:**
 
 - TypeScript migration is not planned — intentional vanilla JS app; toolchain is otherwise current
 - Prettier uses all defaults (`.prettierrc.json: {}`) — maximizes standard behavior, minimizes custom rules; `neostandard({ noStyle: true })` defers all formatting to Prettier and drops the custom `@stylistic/arrow-parens` rule
 - node-modules linker chosen over PnP — aligns with all other Yarn 4 repos in the suite; also unblocked local development on Node 24.15.0 where the PnP ESM loader had an EBADF regression
+- **`vite` resolution strategy** (2026-06-16) — `vite-plugin-pwa` peer dep `^6.0.0 || ^7.0.0 || ^8.0.0` caused Yarn to resolve vite 8.0.8 (vulnerable); pinning with `resolutions: { vite: "^6.4.3" }` forces it to the safe 6.x version already used as the direct dep; remove this resolution when upgrading vite-plugin-pwa to 1.x and Vite to 8+
+- **esbuild Dependabot alert #93** (2026-06-16) — dismissed as "not used"; the missing binary-integrity check is in the Deno distribution only (`lib/deno/mod.ts`); Node.js esbuild uses a separate install path with SHA-256 verification
