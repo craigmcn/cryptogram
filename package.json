@@ -11,11 +11,12 @@
     "preview": "vite preview",
     "format": "prettier --write .",
     "format:check": "prettier --check .",
-    "lint": "eslint ./src",
-    "lint:fix": "eslint ./src --fix",
+    "lint": "eslint ./src ./e2e playwright.config.js",
+    "lint:fix": "eslint ./src ./e2e playwright.config.js --fix",
     "test": "vitest",
     "test:run": "vitest run",
     "test:coverage": "vitest run --coverage",
+    "test:e2e": "playwright test",
     "prepare": "husky"
   },
   "repository": {
@@ -31,8 +32,10 @@
   "author": "Craig McNaughton",
   "license": "GPL-3.0-or-later",
   "devDependencies": {
+    "@playwright/test": "^1.61.1",
     "@vitest/coverage-v8": "^4.1.4",
     "@vitest/eslint-plugin": "^1.6.15",
+    "axe-core": "^4.12.1",
     "eslint": "^9.0.0",
     "eslint-config-prettier": "^10.1.8",
     "husky": "^9.1.7",

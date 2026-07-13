@@ -130,7 +130,7 @@ const initCryptogram = () => {
           ? ` value="${escapedValue}" data-old-value="${escapedValue}"`
           : "";
         const input = l.match(/[A-Z]/)
-          ? `<input class="solution__input" type="text" maxlength="2"${value} data-puzzle="${l}">`
+          ? `<input class="solution__input" type="text" maxlength="2"${value} data-puzzle="${l}" aria-label="Guess for cipher letter ${l}">`
           : escapeHtml(l);
 
         return `<div class="flex flex--column"><div class="solution__item flex flex--ai-end flex--jc-center">${input}</div><div class="solution__puzzle">${escapeHtml(l)}</div></div>`;

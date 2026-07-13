@@ -11,11 +11,12 @@ yarn build:netlify    # dual build → netlify/ and netlify/cryptogram/
 yarn preview          # preview the production build locally
 yarn format           # Prettier — reformat all files in place
 yarn format:check     # Prettier — check only (used by pre-commit hook and CI)
-yarn lint             # ESLint (src/ only)
+yarn lint             # ESLint (src/, e2e/, playwright.config.js)
 yarn lint:fix         # ESLint with auto-fix
 yarn test             # Vitest in watch mode
 yarn test:run         # Vitest single pass (used by pre-commit hook and CI)
 yarn test:coverage    # Vitest single pass with v8 coverage report → coverage/
+yarn test:e2e         # Playwright E2E suite (CI only, not pre-commit)
 ```
 
 ## Architecture
@@ -40,6 +41,8 @@ src/
     styles.scss        # App-specific styles, BEM-ish naming, dark mode via @media
   test/
     setup.js           # jsdom HTML fixture — runs before all tests via vitest setupFiles
+e2e/
+  cryptogram.spec.js   # Playwright E2E — solve/clear/new-puzzle golden paths against a real browser
 index.html             # Static shell — all sections present in HTML, shown/hidden via JS
 ```
 
@@ -78,6 +81,8 @@ index.html             # Static shell — all sections present in HTML, shown/hi
 | Vitest                 | ^4            | Test runner (jsdom environment)                       |
 | @vitest/coverage-v8    | ^4            | V8 coverage reports                                   |
 | @vitest/eslint-plugin  | ^1            | ESLint globals for test files                         |
+| axe-core               | ^4            | Accessibility checks run directly against jsdom       |
+| @playwright/test       | ^1            | E2E testing (Chromium only), CI-only                  |
 | Husky                  | ^9            | Git hooks                                             |
 
 ## Code style
@@ -139,9 +144,13 @@ Tests are co-located with source files (`*.test.js`). The jsdom environment is c
 
 Current coverage: **100%** statements, branches, functions, and lines.
 
+[src/scripts/accessibility.test.js](src/scripts/accessibility.test.js) runs `axe-core` directly against jsdom (no browser) using the real `index.html` markup — both the entry screen and a started puzzle. `color-contrast` is disabled since jsdom doesn't perform layout/rendering.
+
+[e2e/cryptogram.spec.js](e2e/cryptogram.spec.js) is a Playwright suite (Chromium only) that drives the real dev server through the solve/clear/new-puzzle golden paths. It runs in CI only (`yarn test:e2e`), not in the pre-commit hook — browser install + startup is too slow for a hook. Excluded from Vitest's test glob via `exclude: ["e2e/**"]` in [vitest.config.js](vitest.config.js).
+
 The pre-commit hook (`.husky/pre-commit`) runs `yarn format:check && yarn lint && yarn test:run` before every commit. The `prepare` script ensures Husky is installed automatically after `yarn install`.
 
-The GitHub Actions workflow at [.github/workflows/test.yml](.github/workflows/test.yml) runs lint and tests on every push to `main` and on every PR.
+The GitHub Actions workflow at [.github/workflows/test.yml](.github/workflows/test.yml) runs format:check → lint → build → test:coverage → Playwright E2E on every push to `main` and on every PR. Playwright's Chromium binary is cached by `yarn.lock` hash.
 
 ## Dependency maintenance
 
@@ -150,7 +159,7 @@ The GitHub Actions workflow at [.github/workflows/test.yml](.github/workflows/te
 - When reviewing Dependabot PRs, check whether the alert is already resolved by a `resolutions` entry before merging redundant bumps
 - Node.js target is the current Active LTS — update `.nvmrc` when a new LTS is released
 
-## Modernization status (assessed 2026-06-16)
+## Modernization status (assessed 2026-07-13)
 
 Cryptogram meets the cross-repo standard baseline.
 
@@ -166,11 +175,14 @@ Cryptogram meets the cross-repo standard baseline.
 - `.github/workflows/test.yml` — format:check → lint → build → test:coverage on PR + push to `main`
 - `.github/CODEOWNERS` — `* @craigmcn`
 - Branch protection ([ruleset](https://github.com/craigmcn/cryptogram/rules/14954844)) — 1 required approval, Admin role bypass, dismiss stale reviews, require `test` status check, block deletions + force pushes
+- GitHub Actions bumped to current majors — `actions/checkout@v7`, `actions/setup-node@v6`, `actions/cache@v6` (issue #70)
+- axe-core accessibility testing — direct against jsdom, vanilla JS pattern; caught and fixed a real gap (solution inputs had no accessible label) (issue #71)
+- Playwright E2E testing — Chromium only, CI-only, golden-path coverage of solve/clear/new-puzzle (issue #72)
 
 **Outstanding TODOs:**
 
 - **PR #68** (open) — security resolutions for vite, js-yaml, tar, @babel/core; awaiting review and merge
-- Remaining TODOs (vite-plugin-pwa 1.x upgrade, Vite 8 upgrade, both blocked upstream; GitHub Actions bump; axe tooling; Playwright E2E) tracked as issues in the [cryptogram GitHub Project](https://github.com/users/craigmcn/projects/3)
+- Remaining TODOs (vite-plugin-pwa 1.x upgrade, Vite 8 upgrade, both blocked upstream) tracked as issues in the [cryptogram GitHub Project](https://github.com/users/craigmcn/projects/3)
 
 **Key decisions:**
 
