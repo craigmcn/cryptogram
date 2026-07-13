@@ -3,10 +3,14 @@
 import { readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import axe from "axe-core";
-import { describe, expect, it } from "vitest";
+import { describe, expect, it, vi } from "vitest";
 
 const indexHtml = readFileSync(resolve(process.cwd(), "index.html"), "utf-8");
-const bodyMarkup = indexHtml.match(/<body>([\s\S]*)<\/body>/)[1];
+const bodyMatch = indexHtml.match(/<body[^>]*>([\s\S]*)<\/body>/);
+if (!bodyMatch) {
+  throw new Error("Could not find a <body> element in index.html");
+}
+const bodyMarkup = bodyMatch[1];
 
 // jsdom doesn't perform layout/rendering, so rules that depend on it
 // (color contrast, actual visibility) can't be evaluated meaningfully.
@@ -16,8 +20,11 @@ const axeOptions = {
   },
 };
 
+// actions.js captures its DOM elements once at module scope, so every test
+// needs its own fresh module instance bound to that test's own fixture.
 describe("accessibility", () => {
   it("has no axe violations on the initial start screen", async () => {
+    vi.resetModules();
     document.body.innerHTML = bodyMarkup;
     await import("./index.js");
 
@@ -26,6 +33,7 @@ describe("accessibility", () => {
   });
 
   it("has no axe violations once a puzzle is started", async () => {
+    vi.resetModules();
     document.body.innerHTML = bodyMarkup;
     const { start } = await import("./actions.js");
 
