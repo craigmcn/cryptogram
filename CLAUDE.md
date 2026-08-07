@@ -67,23 +67,23 @@ index.html             # Static shell — all sections present in HTML, shown/hi
 
 ## Toolchain
 
-| Tool                   | Version       | Purpose                                               |
-| ---------------------- | ------------- | ----------------------------------------------------- |
-| Node.js                | 24.14.1 (LTS) | Runtime (see `.nvmrc`)                                |
-| Yarn                   | 4.14.1        | Package manager (Berry/node-modules)                  |
-| Vite                   | ^8            | Bundler + dev server                                  |
-| Sass                   | ^1            | SCSS compilation via Vite                             |
-| vite-plugin-pwa        | ^1.3          | Service worker + web manifest                         |
-| ESLint                 | ^9            | Linting (flat config)                                 |
-| neostandard            | ^0.13         | ESLint rule set (successor to eslint-config-standard) |
-| eslint-config-prettier | ^10           | Disables ESLint formatting rules deferred to Prettier |
-| Prettier               | ^3            | Code formatter (JS, HTML, CSS/SCSS, JSON, YAML, MD)   |
-| Vitest                 | ^4            | Test runner (jsdom environment)                       |
-| @vitest/coverage-v8    | ^4            | V8 coverage reports                                   |
-| @vitest/eslint-plugin  | ^1            | ESLint globals for test files                         |
-| axe-core               | ^4            | Accessibility checks run directly against jsdom       |
-| @playwright/test       | ^1            | E2E testing (Chromium only), CI-only                  |
-| Husky                  | ^9            | Git hooks                                             |
+| Tool                   | Version       | Purpose                                                                                                                                           |
+| ---------------------- | ------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Node.js                | 24.14.1 (LTS) | Runtime (see `.nvmrc`); `engines.node` in `package.json` plus `scripts/check-node-version.mjs` fail loudly if the active Node major doesn't match |
+| Yarn                   | 4.14.1        | Package manager (Berry/node-modules)                                                                                                              |
+| Vite                   | ^8            | Bundler + dev server                                                                                                                              |
+| Sass                   | ^1            | SCSS compilation via Vite                                                                                                                         |
+| vite-plugin-pwa        | ^1.3          | Service worker + web manifest                                                                                                                     |
+| ESLint                 | ^9            | Linting (flat config)                                                                                                                             |
+| neostandard            | ^0.13         | ESLint rule set (successor to eslint-config-standard)                                                                                             |
+| eslint-config-prettier | ^10           | Disables ESLint formatting rules deferred to Prettier                                                                                             |
+| Prettier               | ^3            | Code formatter (JS, HTML, CSS/SCSS, JSON, YAML, MD)                                                                                               |
+| Vitest                 | ^4            | Test runner (jsdom environment)                                                                                                                   |
+| @vitest/coverage-v8    | ^4            | V8 coverage reports                                                                                                                               |
+| @vitest/eslint-plugin  | ^1            | ESLint globals for test files                                                                                                                     |
+| axe-core               | ^4            | Accessibility checks run directly against jsdom                                                                                                   |
+| @playwright/test       | ^1            | E2E testing (Chromium only), CI-only                                                                                                              |
+| Husky                  | ^9            | Git hooks                                                                                                                                         |
 
 ## Code style
 
@@ -159,7 +159,7 @@ The GitHub Actions workflow at [.github/workflows/test.yml](.github/workflows/te
 - Check for vulnerabilities: `yarn npm audit`
 - GitHub Dependabot is enabled and will open PRs for vulnerable transitive deps
 - When reviewing Dependabot PRs, check whether the alert is already resolved by a `resolutions` entry before merging redundant bumps
-- Node.js target is the current Active LTS — update `.nvmrc` when a new LTS is released
+- Node.js target is the current Active LTS — update `.nvmrc` and `package.json`'s `engines.node` range together when a new LTS is released
 
 ## Modernization status (assessed 2026-07-13)
 
