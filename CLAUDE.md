@@ -71,9 +71,9 @@ index.html             # Static shell — all sections present in HTML, shown/hi
 | ---------------------- | ------------- | ----------------------------------------------------- |
 | Node.js                | 24.14.1 (LTS) | Runtime (see `.nvmrc`)                                |
 | Yarn                   | 4.14.1        | Package manager (Berry/node-modules)                  |
-| Vite                   | ^6            | Bundler + dev server                                  |
+| Vite                   | ^8            | Bundler + dev server                                  |
 | Sass                   | ^1            | SCSS compilation via Vite                             |
-| vite-plugin-pwa        | ^0.20         | Service worker + web manifest                         |
+| vite-plugin-pwa        | ^1.3          | Service worker + web manifest                         |
 | ESLint                 | ^9            | Linting (flat config)                                 |
 | neostandard            | ^0.13         | ESLint rule set (successor to eslint-config-standard) |
 | eslint-config-prettier | ^10           | Disables ESLint formatting rules deferred to Prettier |
@@ -115,7 +115,6 @@ The `resolutions` field in [package.json](package.json) pins several transitive 
 | `semver ^7.5.2`                       | ReDoS floor                                                                                                                                                                                                                                                                                                                                                                                                                    |
 | `serialize-javascript ^7.0.5`         | RCE/DoS fix used by `@rollup/plugin-terser`                                                                                                                                                                                                                                                                                                                                                                                    |
 | `tar ^7.5.20`                         | PAX size-override file-smuggling (CVE medium)                                                                                                                                                                                                                                                                                                                                                                                  |
-| `vite ^6.4.3`                         | Forces `vite-plugin-pwa` off its `^6\|\|^7\|\|^8` range (was resolving to vulnerable 8.0.8); CVE-2026-53571                                                                                                                                                                                                                                                                                                                    |
 
 ## Yarn (Berry)
 
@@ -179,16 +178,16 @@ Cryptogram meets the cross-repo standard baseline.
 - GitHub Actions bumped to current majors — `actions/checkout@v7`, `actions/setup-node@v6`, `actions/cache@v6` (issue #70)
 - axe-core accessibility testing — direct against jsdom, vanilla JS pattern; caught and fixed a real gap (solution inputs had no accessible label) (issue #71)
 - Playwright E2E testing — Chromium only, CI-only, golden-path coverage of solve/clear/new-puzzle (issue #72)
+- vite-plugin-pwa 0.20.x → 1.3.x and Vite 6 → 8 upgrade (issues #73, #74) — the workbox-build/glob@11 ESM-only issue that previously blocked this no longer reproduces; confirmed clean via `sudoku`, which shipped on vite-plugin-pwa 1.x/Vite 8 from the start. `resolutions.vite` removed (no longer needed now the direct dep is on the safe major)
 
 **Outstanding TODOs:**
 
-- **PR #68** (open) — security resolutions for vite, js-yaml, tar, @babel/core; awaiting review and merge
-- Remaining TODOs (vite-plugin-pwa 1.x upgrade, Vite 8 upgrade, both blocked upstream) tracked as issues in the [cryptogram GitHub Project](https://github.com/users/craigmcn/projects/3)
+- Tracked as issues in the [cryptogram GitHub Project](https://github.com/users/craigmcn/projects/3)
 
 **Key decisions:**
 
 - TypeScript migration is not planned — intentional vanilla JS app; toolchain is otherwise current
 - Prettier uses all defaults (`.prettierrc.json: {}`) — maximizes standard behavior, minimizes custom rules; `neostandard({ noStyle: true })` defers all formatting to Prettier and drops the custom `@stylistic/arrow-parens` rule
 - node-modules linker chosen over PnP — aligns with all other Yarn 4 repos in the suite; also unblocked local development on Node 24.15.0 where the PnP ESM loader had an EBADF regression
-- **`vite` resolution strategy** (2026-06-16) — `vite-plugin-pwa` peer dep `^6.0.0 || ^7.0.0 || ^8.0.0` caused Yarn to resolve vite 8.0.8 (vulnerable); pinning with `resolutions: { vite: "^6.4.3" }` forces it to the safe 6.x version already used as the direct dep; remove this resolution when upgrading vite-plugin-pwa to 1.x and Vite to 8+
 - **esbuild Dependabot alert #93** (2026-06-16) — dismissed as "not used"; the missing binary-integrity check is in the Deno distribution only (`lib/deno/mod.ts`); Node.js esbuild uses a separate install path with SHA-256 verification
+- **Vite 8 / vite-plugin-pwa 1.x upgrade** (2026-08-07) — previously blocked on issues #73/#74 by a workbox-build/glob@11 ESM-only issue; re-tested after `sudoku` shipped cleanly on the same versions, and it now installs and builds without issue here too (`yarn build`, `yarn build:netlify`, `yarn test:coverage`, `yarn test:e2e` all pass). Unlike sudoku, cryptogram's `build:netlify` runs two full separate `vite build` invocations rather than a single build with a `rollupOptions.output` array, so each output directory gets its own service worker for free — no `copy-netlify-sw.mjs`-style workaround needed here
