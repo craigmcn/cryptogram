@@ -1,6 +1,11 @@
 import { configDefaults, defineConfig } from "vitest/config";
 
 export default defineConfig({
+  resolve: {
+    alias: {
+      "virtual:pwa-register": "/src/test/virtual-pwa-register.js",
+    },
+  },
   test: {
     environment: "jsdom",
     setupFiles: ["./src/test/setup.js"],
