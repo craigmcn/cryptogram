@@ -29,4 +29,8 @@ document.body.innerHTML = `
     <button id="clear-button">Clear</button>
     <button id="new-button">New puzzle</button>
   </aside>
+  <div id="notification" hidden>
+    A new version is available.
+    <button id="reload">Reload</button>
+  </div>
 `;

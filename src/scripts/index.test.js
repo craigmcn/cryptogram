@@ -10,16 +10,26 @@ vi.mock("./actions", () => ({
   start: vi.fn(),
 }));
 
+vi.mock("./pwa", () => ({
+  initPwa: vi.fn(),
+}));
+
 describe("index", () => {
   let actions;
+  let pwa;
 
   beforeAll(async () => {
     actions = await import("./actions");
+    pwa = await import("./pwa");
     await import("./index");
   });
 
   it("calls load() on initialisation", () => {
     expect(actions.load).toHaveBeenCalledOnce();
+  });
+
+  it("calls initPwa() on initialisation", () => {
+    expect(pwa.initPwa).toHaveBeenCalledOnce();
   });
 
   it("binds start() to the form submit event", () => {
