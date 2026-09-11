@@ -57,7 +57,7 @@
     "@babel/core": "^7.29.6",
     "brace-expansion@npm:^5.0.5": "^5.0.8",
     "ejs": "^5.0.1",
-    "js-yaml": "^4.3.1",
+    "js-yaml": "^4.3.2",
     "node-gyp": "^12.2.0",
     "semver": "^7.5.2",
     "serialize-javascript": "^7.0.5",
