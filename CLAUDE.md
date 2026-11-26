@@ -152,7 +152,7 @@ Current coverage: **100%** statements, branches, functions, and lines.
 
 The pre-commit hook (`.husky/pre-commit`) runs `yarn format:check && yarn lint && yarn test:run` before every commit. The `prepare` script ensures Husky is installed automatically after `yarn install`.
 
-The GitHub Actions workflow at [.github/workflows/test.yml](.github/workflows/test.yml) runs format:check → lint → build → test:coverage → Playwright E2E on every push to `main` and on every PR. Playwright's Chromium binary is cached by `yarn.lock` hash.
+The GitHub Actions workflow at [.github/workflows/test.yml](.github/workflows/test.yml) runs format:check → lint → build → test:coverage → Playwright E2E on every PR, plus a weekly scheduled run on `main` (no push-to-`main` run: branch protection requires PRs to be up to date). Playwright's Chromium binary is cached by `yarn.lock` hash.
 
 ## Dependency maintenance
 
@@ -174,7 +174,7 @@ Cryptogram meets the cross-repo standard baseline.
 - Pre-commit hook — `yarn format:check && yarn lint && yarn test:run`
 - `vite.config.ts` (renamed from `.js`)
 - Yarn PnP → node-modules linker (eliminates Node 24.x EBADF regression in PnP ESM loader)
-- `.github/workflows/test.yml` — format:check → lint → build → test:coverage on PR + push to `main`
+- `.github/workflows/test.yml` — format:check → lint → build → test:coverage on PRs + weekly on `main`
 - `.github/CODEOWNERS` — `* @craigmcn`
 - Branch protection ([ruleset](https://github.com/craigmcn/cryptogram/rules/14954844)) — 1 required approval, Admin role bypass, dismiss stale reviews, require `test` status check, block deletions + force pushes
 - GitHub Actions bumped to current majors — `actions/checkout@v7`, `actions/setup-node@v6`, `actions/cache@v6` (issue #70)
